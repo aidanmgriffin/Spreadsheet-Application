@@ -1,3 +1,5 @@
+using HW2NS;
+
 namespace HW2Tests
 {
     public class Tests
@@ -6,11 +8,18 @@ namespace HW2Tests
         public void Setup()
         {
         }
-
+        
+        
         [Test]
-        public void Test1()
+        public void TestDistinctIntegersMethodWithListOfZeroes()
         {
-            Assert.Pass();
+            var testList = new List<int>();
+
+            for (int i = 0; i < 10000; i++)
+            {
+                testList.Add(0);
+            }
+            Form1.;
         }
     }
 }

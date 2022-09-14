@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW2", "HW2\HW2.csproj", "{3A85D3DE-E52C-4FDB-870B-C95C5ED6C924}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HW2", "HW2\HW2.csproj", "{3A85D3DE-E52C-4FDB-870B-C95C5ED6C924}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW2Tests", "HW2Tests\HW2Tests.csproj", "{D6D157B8-698E-4EE7-840E-41A95A16D38E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HW2Tests", "HW2Tests\HW2Tests.csproj", "{D6D157B8-698E-4EE7-840E-41A95A16D38E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-namespace HW2
+namespace HW2NS
 {
     internal static class Program
     {
