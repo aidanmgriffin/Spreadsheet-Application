@@ -6,10 +6,23 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
+      "HW2/1.0.0": {
+        "dependencies": {
+          "StyleCop.Analyzers": "1.1.118"
+        },
+        "runtime": {
+          "HW2.dll": {}
+        }
+      },
       "StyleCop.Analyzers/1.1.118": {}
     }
   },
   "libraries": {
+    "HW2/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "StyleCop.Analyzers/1.1.118": {
       "type": "package",
       "serviceable": true,

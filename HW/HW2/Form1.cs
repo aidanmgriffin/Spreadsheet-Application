@@ -18,5 +18,8 @@ namespace HW2
                 list.Add(num);
             }
         }
+
+        
+
     }
 }
