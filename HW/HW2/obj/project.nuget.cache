@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "zsxe4HjLcpf5MTanJXbyXnNCrw/b1OfM2cI0wJhSciM2dnqRKjdJlV2prbeRrUqQrpo4qWU3XyjDu2ARNp5dgw==",
+  "dgSpecHash": "li0cu6FkhVyjVHsuV1DxjfeiN87X4aI9wf555VsqxSNn4fr6KTwmZ4+dCi3E2uDEGHORQpd6pBvufTCzjUk4fw==",
   "success": true,
   "projectFilePath": "C:\\Users\\mauda\\source\\repos\\cpts321-hws\\HW\\HW2\\HW2.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\mauda\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512"
+  ],
   "logs": []
 }
