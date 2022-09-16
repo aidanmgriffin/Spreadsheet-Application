@@ -1,16 +1,15 @@
-using HW2NS;
+﻿using HW2NS;
+using System;
 
 namespace HW2Tests
 {
-    public class Tests
+    /// <summary>
+    /// This class contains tests specific to question one, the hash set approach.
+    /// </summary>
+    public class Q1Tests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         /// <summary>
-        /// Test which passes the distinct integer function a list of zeros. 
+        /// Test which passes the distinct integer function a list of zeros.
         /// Since all elements passed will be 0, there should only be 1 distinct integer.
         /// </summary>
         [Test]
@@ -50,5 +49,25 @@ namespace HW2Tests
             int hashCount = testForm.GetHashCount();
             Assert.That(hashCount, Is.EqualTo(10000));
         }
+
+        /// <summary>
+        /// Test which passed an empty list to the TestDistinctIntegers Method.
+        /// Method should return 0.
+        /// </summary>
+        [Test]
+        public void TestDistinctIntegersMethodWithEmptyList()
+        {
+            var testList = new List<int>();
+
+            Form1 testForm = new Form1();
+
+            testForm.RunDistinctIntegers(testList);
+            int hashCount = testForm.GetHashCount();
+            Assert.That(hashCount, Is.EqualTo(0));
+        }
     }
+
+    /// <summary>
+    /// This class contains tests specific to question one, the hash set approach.
+    /// </summary>
 }
