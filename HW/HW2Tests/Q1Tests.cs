@@ -22,7 +22,7 @@ namespace HW2Tests
                 testList.Add(0);
             }
 
-            Form1 testForm = new Form1();
+            DistinctIntForm testForm = new DistinctIntForm();
 
             testForm.RunDistinctIntegers(testList);
             int hashCount = testForm.GetHashCount();
@@ -43,7 +43,7 @@ namespace HW2Tests
                 testList.Add(i);
             }
 
-            Form1 testForm = new Form1();
+            DistinctIntForm testForm = new DistinctIntForm();
 
             testForm.RunDistinctIntegers(testList);
             int hashCount = testForm.GetHashCount();
@@ -59,7 +59,7 @@ namespace HW2Tests
         {
             var testList = new List<int>();
 
-            Form1 testForm = new Form1();
+            DistinctIntForm testForm = new DistinctIntForm();
 
             testForm.RunDistinctIntegers(testList);
             int hashCount = testForm.GetHashCount();

@@ -6,14 +6,14 @@ using System.Threading;
 
 namespace HW2NS
 {
-    public partial class Form1 : Form
+    public partial class DistinctIntForm : Form
     {
         private int hashCount = 0;
         private int storageCount = 0;
         private int sortedCount = 0;
 
 
-        public Form1()
+        public DistinctIntForm()
         {
             InitializeComponent(); // Load built in WinForms features
 
@@ -45,6 +45,10 @@ namespace HW2NS
         /// </summary>
         public void RunDistinctIntegers(List<int> randList)
         {
+            this.hashCount = 0;
+            this.storageCount = 0;
+            this.sortedCount = 0;
+
             HashSet<int> randHash = new HashSet<int>();
             for (int i = 0; i < randList.Count; i++)
             {
@@ -53,7 +57,7 @@ namespace HW2NS
 
             this.hashCount = randHash.Count;
 
-            for (int index = 1; index < randList.Count; index++)
+            for (int index = 0; index < randList.Count; index++)
             {
                 int nestedIndex = 0;
 
@@ -67,7 +71,7 @@ namespace HW2NS
 
                 if (index == nestedIndex)
                 {
-                    this.storageCount += 1;
+                    this.storageCount++;
                 }
             }
 
@@ -78,13 +82,14 @@ namespace HW2NS
 
             for (int i = 0; i < sortedList.Count; i++)
             {
-                if (i != j)
+                if (sortedList[i] != j)
                 {
                     this.sortedCount++;
-                    j = i;
+                    j = sortedList[i];
                 }
             }
 
+            // Add results to the window.
             this.textBox1.AppendText("HashSet Method: " + this.hashCount);
             this.textBox1.AppendText(Environment.NewLine);
             this.textBox1.AppendText("Time Complexity: O");

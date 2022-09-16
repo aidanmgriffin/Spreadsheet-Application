@@ -1,6 +1,6 @@
 ﻿namespace HW2NS
 {
-    partial class Form1
+    partial class DistinctIntForm
     {
         /// <summary>
         ///  Required designer variable.
