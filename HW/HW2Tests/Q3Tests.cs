@@ -1,9 +1,13 @@
-﻿using HW2NS;
+﻿// <copyright file="Q3Tests.cs" company="Aidan Griffin">
+// Copyright (c) Washington State University. All rights reserved.
+// </copyright>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HW2NS;
 
 namespace HW2Tests
 {
@@ -68,7 +72,6 @@ namespace HW2Tests
             testForm.RunDistinctIntegers(testList);
             int sortedCount = testForm.GetSortedCount();
             Assert.That(sortedCount, Is.EqualTo(0));
-
         }
     }
 }

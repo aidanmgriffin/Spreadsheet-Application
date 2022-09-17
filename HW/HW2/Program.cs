@@ -1,3 +1,7 @@
+// <copyright file="Program.cs" company="Aidan Griffin">
+// Copyright (c) Washington State University. All rights reserved.
+// </copyright>
+
 namespace HW2NS
 {
     internal static class Program

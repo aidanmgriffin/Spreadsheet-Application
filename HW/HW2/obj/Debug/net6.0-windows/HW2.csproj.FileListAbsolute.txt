@@ -14,7 +14,6 @@ C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\obj\Debug\net6.0-windows\refint\H
 C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\obj\Debug\net6.0-windows\HW2.pdb
 C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\obj\Debug\net6.0-windows\HW2.genruntimeconfig.cache
 C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\obj\Debug\net6.0-windows\ref\HW2.dll
-C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\obj\Debug\net6.0-windows\HW2ns.Form1.resources
 C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.dll
 C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\bin\Debug\net6.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
@@ -26,3 +25,4 @@ C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\bin\Debug\net6.0-windows\Microsof
 C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\bin\Debug\net6.0-windows\Microsoft.Extensions.Options.dll
 C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\bin\Debug\net6.0-windows\Microsoft.Extensions.Primitives.dll
 C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\obj\Debug\net6.0-windows\HW2.csproj.CopyComplete
+C:\Users\mauda\source\repos\cpts321-hws\HW\HW2\obj\Debug\net6.0-windows\HW2NS.DistinctIntForm.resources

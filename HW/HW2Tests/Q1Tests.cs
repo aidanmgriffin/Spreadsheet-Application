@@ -1,5 +1,9 @@
-﻿using HW2NS;
+﻿// <copyright file="Q1Tests.cs" company="Aidan Griffin">
+// Copyright (c) Washington State University. All rights reserved.
+// </copyright>
+
 using System;
+using HW2NS;
 
 namespace HW2Tests
 {
@@ -66,8 +70,4 @@ namespace HW2Tests
             Assert.That(hashCount, Is.EqualTo(0));
         }
     }
-
-    /// <summary>
-    /// This class contains tests specific to question one, the hash set approach.
-    /// </summary>
 }

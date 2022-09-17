@@ -4555,7 +4555,7 @@
       "projectName": "HW2Tests",
       "projectPath": "C:\\Users\\mauda\\source\\repos\\cpts321-hws\\HW\\HW2Tests\\HW2Tests.csproj",
       "packagesPath": "C:\\Users\\mauda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mauda\\source\\repos\\cpts321-hws\\HW\\HW2Tests\\obj\\",
+      "outputPath": "C:\\Users\\mauda\\Source\\Repos\\cpts321-hws\\HW\\HW2Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
