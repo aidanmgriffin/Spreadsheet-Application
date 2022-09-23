@@ -1,3 +1,5 @@
+//using NotepadApplication;
+using Microsoft.VisualBasic;
 using System.Net.Http.Headers;
 using System.Windows.Forms.Design;
 
@@ -42,11 +44,14 @@ namespace Interface
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
+
             StreamWriter sw;
             sfd.InitialDirectory = Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 sw = new StreamWriter(sfd.FileName);
+                sw.Write(this.interfaceTextBox.Text);
+                sw.Close();
             }
         }
 
@@ -57,6 +62,25 @@ namespace Interface
         private void LoadText(TextReader sr)
         {
             this.interfaceTextBox.AppendText(sr.ReadToEnd());
+        }
+
+        /// <summary>
+        /// Action that takes place when "Load first 50 fibonacci numbers" is clicked. Creates fibonacci object with 50 max lines...
+        /// </summary>
+        private void loadFibonacciNumbersFirst50ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FibonacciTextReader fibonacciObject = new FibonacciTextReader(50);
+            this.interfaceTextBox.AppendText(fibonacciObject.ReadToEnd());
+        }
+
+
+        /// <summary>
+        /// Action that takes place when "Load first 100 fibonacci numbers" is clicked. Creates fibonacci object with 100 max lines...
+        /// </summary>
+        private void loadFibonacciNumbersFirst100ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FibonacciTextReader fibonacciObject = new FibonacciTextReader(100);
+            this.interfaceTextBox.AppendText(fibonacciObject.ReadToEnd());
         }
     }
 }
