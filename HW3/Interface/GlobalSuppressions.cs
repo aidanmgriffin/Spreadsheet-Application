@@ -7,3 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "<Pending>", Scope = "member", Target = "~M:Interface.Interface.openToolStripMenuItem_Click(System.Object,System.EventArgs)")]
 [assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "<Pending>", Scope = "member", Target = "~M:Interface.Interface.saveToolStripMenuItem_Click(System.Object,System.EventArgs)")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1101:Prefix local calls with this", Justification = "<Pending>", Scope = "member", Target = "~M:Interface.Interface.#ctor")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1611:Element parameters should be documented", Justification = "<Pending>", Scope = "member", Target = "~M:Interface.Interface.saveToolStripMenuItem_Click(System.Object,System.EventArgs)")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1611:Element parameters should be documented", Justification = "<Pending>", Scope = "member", Target = "~M:Interface.Interface.openToolStripMenuItem_Click(System.Object,System.EventArgs)")]

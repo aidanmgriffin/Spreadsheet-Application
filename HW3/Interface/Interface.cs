@@ -3,8 +3,14 @@ using System.Windows.Forms.Design;
 
 namespace Interface
 {
+    /// <summary>
+    /// The class representing the notepad user interface and it's functionality.
+    /// </summary>
     public partial class Interface : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Interface"/> class.
+        /// </summary>
         public Interface()
         {
             InitializeComponent();
@@ -30,6 +36,9 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// When file > save is clicked, a new dialog is created for the user. After entering the save information, the function saves the file.
+        /// </summary>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -42,17 +51,12 @@ namespace Interface
         }
 
         /// <summary>
-        ///  Reads all text in TextReader object and adds it to the textbox in my interface.
+        ///  Reads all text in TextReader object and adds it to the textbox in the interface.
         /// </summary>
         /// <param name="sr"> Takes a TextReader object. </param>
         private void LoadText(TextReader sr)
         {
             this.interfaceTextBox.AppendText(sr.ReadToEnd());
         }
-
     }
-
-
 }
-
-
