@@ -1,27 +1,49 @@
-﻿using System.ComponentModel;
-using System.Reflection.Metadata.Ecma335;
-
-namespace SpreadsheetEngine
+﻿namespace SpreadsheetEngine
 {
+    using System.ComponentModel;
+    using System.Reflection.Metadata.Ecma335;
+
     public abstract class Cell : INotifyPropertyChanged
     {
 
         public Cell(int columnIndex, int rowIndex)
         {
-            this.rowIndex = rowIndex;
-            this.columnIndex = columnIndex;
+            this.RowIndex = rowIndex;
+            this.ColumnIndex = columnIndex;
         }
 
-        public int rowIndex { get; }
-        public int columnIndex { get; }
+        public event PropertyChangedEventHandler PropertyChanged;
+     
+        /// <summary>
+        /// Contains the protected cell text so getting and setting can be altered. All lowercase to differentiate from property of same name.
+        /// </summary>
+        protected string celltext = string.Empty;
 
-        protected string celltext = "";
+        /// <summary>
+        ///  Contains the protected cell value so getting and setting can be altered. All lowercase to differentiate from property of same name.
+        /// </summary>
+        protected string cellvalue = "";
 
-        public event PropertyChangedEventHandler PropertyChanged; //= delegate { };
 
+        /// <summary>
+        /// Gets the current index of the row.
+        /// </summary>
+        public int RowIndex { get; }
+
+        /// <summary>
+        /// Gets the current index of the column.
+        /// </summary>
+        public int ColumnIndex { get; }
+
+        /// <summary>
+        /// Get / Set cell text with check for same text. Also allows subscription.
+        /// </summary>
         public string cellText
         {
-            get { return celltext; }
+            get
+            {
+                return celltext;
+            }
 
             set
             {
@@ -34,10 +56,16 @@ namespace SpreadsheetEngine
             }
         }
 
-        protected string cellvalue = "";
+        /// <summary>
+        /// Get / Set cell value with check for same value. Also allows subscription.
+        /// </summary>
         public string cellValue
         {
-            get { return cellvalue; }
+            get 
+            { 
+                return cellvalue;
+            }
+
             internal set
             {
                 if (value != this.cellvalue)

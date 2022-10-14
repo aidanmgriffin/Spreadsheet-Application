@@ -1,9 +1,9 @@
-using SpreadsheetEngine;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 namespace Spreadsheet_Aidan_Griffin
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using SpreadsheetEngine;
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -16,7 +16,10 @@ namespace Spreadsheet_Aidan_Griffin
             this.newSpreadsheet.CellPropertyChanged += new PropertyChangedEventHandler(this.SpreadsheetPropertyChanged);
         }
 
-        public Spreadsheet newSpreadsheet;
+        /// <summary>
+        /// Private instance of Spreadsheet class.
+        /// </summary>
+        private Spreadsheet newSpreadsheet;
 
         /// <summary>
         /// This method programatically adds columns and rows to dataGridView.
@@ -51,11 +54,11 @@ namespace Spreadsheet_Aidan_Griffin
         {
             Cell temp = sender as Cell;
 
-            this.dataGridView1.Rows[temp.rowIndex].Cells[temp.columnIndex].Value = temp.cellValue; 
+            this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Value = temp.cellValue; 
         }
 
         /// <summary>
-        /// On button click, the demo is initiated.
+        /// On button click, the demos are initiated.
         /// </summary>
         /// <param name="sender"> Sender parameter. </param>
         /// <param name="e"> EventArgs parameter. </param>
