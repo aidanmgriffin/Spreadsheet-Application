@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotepadApplication", "Interface\NotepadApplication.csproj", "{58C7A6DD-DC63-4F4D-B87C-DA830A7D0F0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotepadApplicationTests", "InterfaceTests\NotepadApplicationTests.csproj", "{45679EF9-7133-47AC-B52A-4A5CD754BED1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58C7A6DD-DC63-4F4D-B87C-DA830A7D0F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C7A6DD-DC63-4F4D-B87C-DA830A7D0F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C7A6DD-DC63-4F4D-B87C-DA830A7D0F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C7A6DD-DC63-4F4D-B87C-DA830A7D0F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45679EF9-7133-47AC-B52A-4A5CD754BED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45679EF9-7133-47AC-B52A-4A5CD754BED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45679EF9-7133-47AC-B52A-4A5CD754BED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45679EF9-7133-47AC-B52A-4A5CD754BED1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B879EC5-260E-4717-9123-D6CF807D453B}
+	EndGlobalSection
+EndGlobal
