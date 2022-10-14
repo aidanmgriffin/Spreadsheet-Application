@@ -1,4 +1,9 @@
-﻿namespace SpreadsheetEngine
+﻿/*
+ * Aidan Griffin
+ * 11680523
+ */
+
+namespace SpreadsheetEngine
 {
     using System;
     using System.Collections.Generic;
@@ -8,17 +13,20 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Defines the various methods required to create a spreadsheet.
+    /// </summary>
     public class Spreadsheet
     {
         /// <summary>
         /// Number of columns in spreadsheet.
         /// </summary>
-        static int columnCount = 0;
+        private static int columnCount = 0;
 
         /// <summary>
         /// Number of rows in spreadsheet.
         /// </summary>
-        static int rowCount = 0;
+        private static int rowCount = 0;
 
         /// <summary>
         /// Declare 2d array.
@@ -44,7 +52,7 @@
                 for (int j = 0; j < numRows; j++)
                 {
                     CellChild newChild = new CellChild(i, j);
-                    newChild.PropertyChanged += new PropertyChangedEventHandler(CellChangedEvent);
+                    newChild.PropertyChanged += new PropertyChangedEventHandler(this.CellChangedEvent);
                     this.spreadsheetArray[i, j] = newChild;
                 }
             }
@@ -66,13 +74,13 @@
 
             if (e.PropertyName != null)
             {
-                if (temp.cellText[0] == '=')
+                if (temp.CellText[0] == '=')
                 {
-                    temp.cellValue = temp.cellText.Substring(1);
+                    temp.CellValue = temp.CellText.Substring(1);
                 }
                 else
                 {
-                    temp.cellValue = temp.cellText;
+                    temp.CellValue = temp.CellText;
                 }
 
                 this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
@@ -88,7 +96,7 @@
         public Cell GetCell(int columnIndex, int rowIndex)
         {
             if (this.spreadsheetArray[columnIndex, rowIndex] != null)
-            { 
+            {
                 return this.spreadsheetArray[columnIndex, rowIndex];
             }
             else

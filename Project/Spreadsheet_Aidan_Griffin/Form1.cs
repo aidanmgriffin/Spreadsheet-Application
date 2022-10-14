@@ -1,11 +1,28 @@
+/*
+ * Aidan Griffin
+ * 11680523
+ */
+
 namespace Spreadsheet_Aidan_Griffin
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using SpreadsheetEngine;
 
+    /// <summary>
+    /// Preset Form1.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Private instance of Spreadsheet class.
+        /// </summary>
+        private Spreadsheet newSpreadsheet;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// Preset Form1 Constructor.
+        /// </summary>
         public Form1()
         {
             this.InitializeComponent();
@@ -15,11 +32,6 @@ namespace Spreadsheet_Aidan_Griffin
             this.newSpreadsheet = new Spreadsheet(26, 50);
             this.newSpreadsheet.CellPropertyChanged += new PropertyChangedEventHandler(this.SpreadsheetPropertyChanged);
         }
-
-        /// <summary>
-        /// Private instance of Spreadsheet class.
-        /// </summary>
-        private Spreadsheet newSpreadsheet;
 
         /// <summary>
         /// This method programatically adds columns and rows to dataGridView.
@@ -54,7 +66,7 @@ namespace Spreadsheet_Aidan_Griffin
         {
             Cell temp = sender as Cell;
 
-            this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Value = temp.cellValue; 
+            this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Value = temp.CellValue;
         }
 
         /// <summary>
@@ -71,20 +83,19 @@ namespace Spreadsheet_Aidan_Griffin
                 int random_row = rnd.Next(0, 50);
 
                 SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(random_column, random_row);
-                temp.cellText = "Hello";
+                temp.CellText = "Hello";
             }
 
             for (int i = 0; i < 50; i++)
             {
                 SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(1, i);
-                temp.cellText = "This is cell B" + (i + 1);
+                temp.CellText = "This is cell B" + (i + 1);
             }
-
 
             for (int i = 0; i < 50; i++)
             {
                 SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(0, i);
-                temp.cellText = "=B" + (i + 1);
+                temp.CellText = "=B" + (i + 1);
             }
         }
     }

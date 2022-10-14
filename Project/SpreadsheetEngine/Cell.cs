@@ -1,19 +1,18 @@
-﻿namespace SpreadsheetEngine
+﻿/*
+ * Aidan Griffin
+ * 11680523
+ */
+
+namespace SpreadsheetEngine
 {
     using System.ComponentModel;
     using System.Reflection.Metadata.Ecma335;
 
+    /// <summary>
+    /// Abstract cell class defines the methods and values which are contained inside a cell.
+    /// </summary>
     public abstract class Cell : INotifyPropertyChanged
     {
-
-        public Cell(int columnIndex, int rowIndex)
-        {
-            this.RowIndex = rowIndex;
-            this.ColumnIndex = columnIndex;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-     
         /// <summary>
         /// Contains the protected cell text so getting and setting can be altered. All lowercase to differentiate from property of same name.
         /// </summary>
@@ -22,8 +21,23 @@
         /// <summary>
         ///  Contains the protected cell value so getting and setting can be altered. All lowercase to differentiate from property of same name.
         /// </summary>
-        protected string cellvalue = "";
+        protected string cellvalue = string.Empty;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cell"/> class.
+        /// </summary>
+        /// <param name="columnIndex">Sets index of the cell's column. </param>
+        /// <param name="rowIndex">Sets index of the cell's row. </param>
+        public Cell(int columnIndex, int rowIndex)
+        {
+            this.RowIndex = rowIndex;
+            this.ColumnIndex = columnIndex;
+        }
+
+        /// <summary>
+        /// Handles cell change events.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets the current index of the row.
@@ -36,43 +50,41 @@
         public int ColumnIndex { get; }
 
         /// <summary>
-        /// Get / Set cell text with check for same text. Also allows subscription.
+        /// Gets or sets cell text with check for same text. Also allows subscription.
         /// </summary>
-        public string cellText
+        public string CellText
         {
             get
             {
-                return celltext;
+                return this.celltext;
             }
 
             set
             {
-                if (value != this.celltext) 
+                if (value != this.celltext)
                 {
-                    celltext = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("Text"));
-
+                    this.celltext = value;
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("Text"));
                 }
             }
         }
 
         /// <summary>
-        /// Get / Set cell value with check for same value. Also allows subscription.
+        /// Gets cell value with check for same value. Also allows subscription.
         /// </summary>
-        public string cellValue
+        public string CellValue
         {
-            get 
-            { 
-                return cellvalue;
+            get
+            {
+                return this.cellvalue;
             }
 
             internal set
             {
                 if (value != this.cellvalue)
                 {
-                    cellvalue = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("Value"));
-
+                    this.cellvalue = value;
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("Value"));
                 }
             }
         }
