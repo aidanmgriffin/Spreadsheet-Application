@@ -10,54 +10,61 @@ namespace SpreadsheetEngine
 {
     public class Spreadsheet
     {
-        Cell[,] spreadsheetArray = new Cell[columnCount, rowCount];
+        static int columnCount = 0;
+        static int rowCount = 0;
+        CellChild[,] spreadsheetArray;
 
         public Spreadsheet(int numColumns, int numRows)
         {
+            Console.WriteLine("in spreadsheet");
             columnCount = numColumns;
             rowCount = numRows;
+
+            this.spreadsheetArray = new CellChild[columnCount, rowCount];
 
             for (int i = 0; i < numColumns; i++)
             {
                 for (int j = 0; j < numRows; j++)
                 {
                     CellChild newChild = new CellChild(i, j);
-
+                    newChild.PropertyChanged += new PropertyChangedEventHandler(CellChangedEvent);
                     spreadsheetArray[i, j] = newChild;
-                    newChild.PropertyChanged += CellPropertyChanged;
-
                 }
             }
-
-            Console.WriteLine(spreadsheetArray[5, 5].columnIndex + spreadsheetArray[5, 5].rowIndex);
         }
 
-        static int columnCount = 0;
-        static int rowCount = 0;
+        public event PropertyChangedEventHandler CellPropertyChanged;
 
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        
-        
-        public void CellPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void CellChangedEvent(object sender, PropertyChangedEventArgs e)
         {
-            Console.WriteLine("pc");
+            Cell temp = sender as Cell;
+
+            if (e.PropertyName != null)
+            {
+                if (temp.cellText[0] == '=')
+                {
+                    temp.cellValue = temp.cellText.Substring(1);
+                }
+                else
+                {
+                    temp.cellValue = temp.cellText;
+                }
+
+                CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
+            }
         }
 
-        
-        Cell GetCell(int columnIndex, int rowIndex)
+
+        public Cell GetCell(int columnIndex, int rowIndex)
         {
-            if (this.spreadsheetArray[columnIndex, rowIndex] == null)
+            if (this.spreadsheetArray[columnIndex, rowIndex] != null)
+            { 
+                return this.spreadsheetArray[columnIndex, rowIndex];
+            }
+            else
             {
                 return null;
             }
-            else 
-            {
-                return this.spreadsheetArray[columnIndex, rowIndex]; 
-            }
         }
-
-
-
     }
 }

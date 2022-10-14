@@ -8,6 +8,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+	<!--<PropertyGroup>
+		<CodeAnalysisRuleSet>$(SolutionDir)\StyleCopRules\stylecopjson.ruleset</CodeAnalysisRuleSet>
+	</PropertyGroup>-->
+
   <ItemGroup>
     <None Remove="stylecop.json" />
   </ItemGroup>

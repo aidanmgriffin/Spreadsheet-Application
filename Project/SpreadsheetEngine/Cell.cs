@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SpreadsheetEngine
 {
     public abstract class Cell : INotifyPropertyChanged
     {
 
-        public Cell(int rowIndex, int columnIndex)
+        public Cell(int columnIndex, int rowIndex)
         {
             this.rowIndex = rowIndex;
             this.columnIndex = columnIndex;
@@ -14,22 +15,38 @@ namespace SpreadsheetEngine
         public int rowIndex { get; }
         public int columnIndex { get; }
 
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        protected string celltext = "";
 
-        protected string cellText
+        public event PropertyChangedEventHandler PropertyChanged; //= delegate { };
+
+        public string cellText
         {
-            get { return cellText; }
+            get { return celltext; }
+
             set
             {
-                if (value == cellText) { return; }
-                cellText = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("cellText"));
+                if (value != this.celltext) 
+                {
+                    celltext = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("Text"));
+
+                }
             }
         }
 
-        protected string cellValue
+        protected string cellvalue = "";
+        public string cellValue
         {
-            get { return cellValue; }
+            get { return cellvalue; }
+            internal set
+            {
+                if (value != this.cellvalue)
+                {
+                    cellvalue = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("Value"));
+
+                }
+            }
         }
     }
 }
