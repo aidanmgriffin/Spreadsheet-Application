@@ -1,7 +1,15 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\HW",
+    "\\HW1",
+    "\\HW3",
+    "\\HW4",
+    "\\HW\\HW2",
+    "\\HW\\HW2Tests",
+    "\\Project",
+    "\\Project\\Spreadsheet_Aidan_Griffin"
   ],
-  "SelectedNode": "\\Project.sln",
+  "SelectedNode": "\\Project\\Project.sln",
   "PreviewInSolutionExplorer": false
 }
