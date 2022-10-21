@@ -8,15 +8,15 @@ using System.Xml.Linq;
 namespace SpreadsheetEngine
 {
     /// <summary>
-    /// Handles subtraction cases.
+    /// Handles multiplication case.
     /// </summary>
-    internal class SubtractionOperatorNode : OperatorNode
+    internal class MultiplicationOperatorNode : OperatorNode
     {
-        public SubtractionOperatorNode() : base('-') 
+        public MultiplicationOperatorNode() : base('*')
         {
         }
-         
-        // Operator, precedence, associativity are all included.
+
+        //Operator, precedence, associativity are all included.
         public override double Evaluate()
         {
             return this.Left.Evaluate() + this.Right.Evaluate();

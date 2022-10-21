@@ -8,11 +8,16 @@ namespace SpreadsheetEngine
 {
     internal class ConstantNode : ExpressionTreeNode
     {
-        public double value { get; set; }
-
-        public double evaluate()
+        public ConstantNode(double value)
         {
-            return 0;
+            Value = value;
+        }
+
+        public double Value { get; set; }
+
+        public override double Evaluate()
+        {
+            return Value;
         }
     }
 }

@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SpreadsheetEngine
 {
-    internal class SubtractionOperatorNode : OperatorNode
+    /// <summary>
+    /// Handles addition case.
+    /// </summary>
+    internal class AdditionOperatorNode : OperatorNode
     {
-        //Operator, precedence, associativity are all included.
-        public double Evaluate()
+        public AdditionOperatorNode() : base('+') 
         {
-            return 0;
+        }
+
+        // Operator, precedence, associativity are all included.
+        public override double Evaluate()
+        {
+            return this.Left.Evaluate() + this.Right.Evaluate();
         }
     }
 }

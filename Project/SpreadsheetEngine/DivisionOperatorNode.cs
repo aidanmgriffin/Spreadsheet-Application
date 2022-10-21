@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,15 @@ using System.Xml.Linq;
 namespace SpreadsheetEngine
 {
     /// <summary>
-    /// Handles subtraction cases.
+    /// Handles division case.
     /// </summary>
-    internal class SubtractionOperatorNode : OperatorNode
+    internal class DivisionOperatorNode : OperatorNode
     {
-        public SubtractionOperatorNode() : base('-') 
+        public DivisionOperatorNode() : base('/')
         {
         }
-         
-        // Operator, precedence, associativity are all included.
+
+        //Operator, precedence, associativity are all included.
         public override double Evaluate()
         {
             return this.Left.Evaluate() + this.Right.Evaluate();

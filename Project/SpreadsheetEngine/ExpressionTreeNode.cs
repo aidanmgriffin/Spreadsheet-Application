@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace SpreadsheetEngine
 {
-    abstract class ExpressionTreeNode
+    /// <summary>
+    /// Base abstract tree node.
+    /// </summary>
+    public abstract class ExpressionTreeNode
     {
-        public double Evaluate()
-        {
-            return 0;
-        }
+        /// <summary>
+        /// Evalueate(): abstract per class notes.
+        /// </summary>
+        /// <returns> Double. </returns>
+        public abstract double Evaluate();
     }
 }
