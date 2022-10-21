@@ -25,17 +25,19 @@ namespace SpreadsheetEngine
                 switch (input)
                 {
                     case "1":
-                        currentExpression = Console.ReadLine();
+                        Console.Write("Enter expression: ");
+                        currentExpression = Console.ReadLine(); 
+                        expressionTree = new ExpressionTree(currentExpression);
                         break;
                     case "2":
-                        Console.WriteLine("Enter variable name: ");
+                        Console.Write("Enter variable name: ");
                         string variableName = Console.ReadLine();
-                        Console.WriteLine("Enter variable value: ");
+                        Console.Write("Enter variable value: ");
                         Double variableValue = double.Parse(Console.ReadLine());
                         expressionTree.SetVariable(variableName, variableValue);
                         break;
                     case "3":
-                        expressionTree.Evaluate();
+                        Console.WriteLine(expressionTree.Evaluate().ToString());
                         break;
                     case "4":
                         Console.WriteLine("Done");
