@@ -8,6 +8,10 @@ namespace SpreadsheetEngine
 {
     public class ExpressionTree
     {
+        private ExpressionTreeNode root;
+
+        private Dictionary<string, double> variables = new Dictionary<string, double>();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
         /// Constructor creates the tree from the specific expression.
