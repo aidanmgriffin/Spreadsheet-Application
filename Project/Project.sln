@@ -12,10 +12,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadsheetEngineTests", "SpreadsheetEngineTests\SpreadsheetEngineTests.csproj", "{BE08D8F0-F7A6-422C-AED4-E57993426A8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpreadsheetEngineTests", "SpreadsheetEngineTests\SpreadsheetEngineTests.csproj", "{BE08D8F0-F7A6-422C-AED4-E57993426A8D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{01F41BCA-BC0D-45A4-B5B2-68820A330AB3} = {01F41BCA-BC0D-45A4-B5B2-68820A330AB3}
 		{771533F2-7CF4-4E93-B789-26FAF074E4B6} = {771533F2-7CF4-4E93-B789-26FAF074E4B6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{7B028A9F-F9AD-4B66-9079-FC6F3235EEA0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{01F41BCA-BC0D-45A4-B5B2-68820A330AB3} = {01F41BCA-BC0D-45A4-B5B2-68820A330AB3}
 	EndProjectSection
 EndProject
 Global
@@ -36,6 +41,10 @@ Global
 		{BE08D8F0-F7A6-422C-AED4-E57993426A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE08D8F0-F7A6-422C-AED4-E57993426A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE08D8F0-F7A6-422C-AED4-E57993426A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B028A9F-F9AD-4B66-9079-FC6F3235EEA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B028A9F-F9AD-4B66-9079-FC6F3235EEA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B028A9F-F9AD-4B66-9079-FC6F3235EEA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B028A9F-F9AD-4B66-9079-FC6F3235EEA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
