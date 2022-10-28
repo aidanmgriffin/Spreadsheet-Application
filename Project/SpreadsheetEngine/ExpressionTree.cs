@@ -133,42 +133,6 @@ namespace SpreadsheetEngine
             return treeStack.Pop();
         }
 
-        //private ExpressionTreeNode Compile(string expression)
-        //{
-        //    if (string.IsNullOrEmpty(expression))
-        //    {
-        //        return null;
-        //    }
-
-        //    OperatorNodeFactory factory = new OperatorNodeFactory();
-
-        //    for (int expressionIndex = expression.Length - 1; expressionIndex >= 0; expressionIndex--)
-        //    {
-        //        ExpressionTreeNode n = factory.CreateOperatorNode(expression[expressionIndex]);
-
-        //        if (n != null)
-        //        {
-        //            ((OperatorNode)n).Left = Compile(expression.Substring(0, expressionIndex));
-        //            ((OperatorNode)n).Right = Compile(expression.Substring(expressionIndex + 1));
-
-        //            return n;
-        //        }
-        //    }
-
-        //    double number;
-
-        //    // a constant
-        //    if (double.TryParse(expression, out number))
-        //    {
-        //        return new ConstantNode(number);
-        //    }
-        //    // or variable
-        //    else
-        //    {
-        //        return new VariableNode(expression, this.variables);
-        //    }
-        //}
-
         /// <summary>
         /// Transform the expression string into a postfix order using Djikstra's Shunting yard algorithm.
         /// </summary>
@@ -250,10 +214,6 @@ namespace SpreadsheetEngine
 
         }
 
-        //public double GetVariable(string variableName)
-        //{
-        //    return this.variables[variableName];
-        //}
 
         /// <summary>
         /// Evaluate expression to a double value.
