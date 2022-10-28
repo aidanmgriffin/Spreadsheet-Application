@@ -1,4 +1,9 @@
-﻿namespace SpreadsheetEngine
+﻿/*
+ * Aidan Griffin
+ * 11680523
+ */
+
+namespace SpreadsheetEngine
 {
     /// <summary>
     /// Handles subtraction cases.
