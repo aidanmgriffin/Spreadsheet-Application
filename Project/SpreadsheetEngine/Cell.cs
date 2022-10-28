@@ -6,6 +6,7 @@
 namespace SpreadsheetEngine
 {
     using System.ComponentModel;
+    using System.Reflection.Metadata.Ecma335;
 
     /// <summary>
     /// Abstract cell class defines the methods and values which are contained inside a cell.
