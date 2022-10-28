@@ -10,6 +10,12 @@ namespace SpreadsheetEngine
     /// </summary>
     public class ExpressionTree
     {
+        public Dictionary<string, double> variables = new Dictionary<string, double>();
+
+        /// <summary>
+        /// Values indicate the order of precedence amongst operators.
+        /// </summary>
+        /// <returns> Dictionary entry containing operator and precedence. </returns>
         private readonly Dictionary<char, int> precedenceDictionary = new Dictionary<char, int>()
         {
             { '+', 1 },
@@ -19,8 +25,6 @@ namespace SpreadsheetEngine
             { '^', 3 },
             { '(', -1 },
         };
-
-        private Dictionary<string, double> variables = new Dictionary<string, double>();
 
         private ExpressionTreeNode root;
 
@@ -166,14 +170,10 @@ namespace SpreadsheetEngine
         //}
 
         /// <summary>
-        /// Values indicate the order of precedence amongst operators.
-        /// </summary>
-        
-        /// <summary>
         /// Transform the expression string into a postfix order using Djikstra's Shunting yard algorithm.
         /// </summary>
         /// <param name="expression">Infix expression. </param>
-        private string PostfixOrder(string expression)
+        public string PostfixOrder(string expression)
         {
             Stack<char> postfixStack = new Stack<char>();
 

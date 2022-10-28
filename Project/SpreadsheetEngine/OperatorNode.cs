@@ -5,23 +5,34 @@
 
 namespace SpreadsheetEngine
 {
+    /// <summary>
+    /// Instance of the ExpressionTreeNode class.
+    /// </summary>
     abstract class OperatorNode : ExpressionTreeNode
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperatorNode"/> class.
+        /// </summary>
+        /// <param name="c">Operator from expression. </param>
         public OperatorNode(char c)
         {
-            this.operatorVal = c;
+            this.OperatorVal = c;
             this.Left = null;
             this.Right = null;
         }
-        public char operatorVal { get; set; }
 
         /// <summary>
-        /// Left subtree.
+        /// Gets or sets character value.
+        /// </summary>
+        public char OperatorVal { get; set; }
+
+        /// <summary>
+        /// Gets or sets left subtree.
         /// </summary>
         public ExpressionTreeNode Left { get; set; }
 
         /// <summary>
-        /// Right subtree.
+        /// Gets or sets Right subtree.
         /// </summary>
         public ExpressionTreeNode Right { get; set; }
 

@@ -3,28 +3,41 @@
  * 11680523
  */
 
-using System.Transactions;
-
 namespace SpreadsheetEngine
 {
+    /// <summary>
+    /// Expression Tree Node to facilitate variables.
+    /// </summary>
     internal class VariableNode : ExpressionTreeNode
     {
+
+        private readonly Dictionary<string, double> vars;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VariableNode"/> class.
+        /// </summary>
+        /// <param name="name"> Name of key value.</param>
+        /// <param name="vars"> Reference to variables dictionary declaired in expressiontree.cs </param>
         public VariableNode(string name, Dictionary<string, double> vars)
         {
             this.Name = name;
-            this.Vars = vars;
+            this.vars = vars;
         }
 
-        public double Value { get; set; }
+        /// <summary>
+        /// Gets or sets name value.
+        /// </summary>
         public string Name { get; set; }
 
-        Dictionary<string, double> Vars;
-
+        /// <summary>
+        /// Finds and returns a given node in referenced variables dictionary.
+        /// </summary>
+        /// <returns> Value at key in dictionary. </returns>
         public override double Evaluate()
         {
             try
             {
-                return this.Vars[this.Name];
+                return this.vars[this.Name];
             }
             catch (KeyNotFoundException)
             {
