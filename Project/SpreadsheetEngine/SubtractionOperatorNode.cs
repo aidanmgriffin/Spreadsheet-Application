@@ -10,11 +10,23 @@ namespace SpreadsheetEngine
     /// </summary>
     internal class SubtractionOperatorNode : OperatorNode
     {
-        public SubtractionOperatorNode() : base('-')
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubtractionOperatorNode"/> class.
+        /// </summary>
+        public SubtractionOperatorNode()
+            : base('-')
         {
         }
 
-        // Operator, precedence, associativity are all included.
+        // Operator, precedence, associativity are all included in class for the next assignment.
+        // char operator = '-'
+        // char precedence = 1;
+        // enum associativity = left;
+
+        /// <summary>
+        /// Evaluate using subtraction.
+        /// </summary>
+        /// <returns>Evaluated double value. </returns>
         public override double Evaluate()
         {
             return this.Right.Evaluate() - this.Left.Evaluate();

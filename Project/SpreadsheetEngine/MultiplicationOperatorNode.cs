@@ -10,14 +10,23 @@ namespace SpreadsheetEngine
     /// </summary>
     internal class MultiplicationOperatorNode : OperatorNode
     {
-        public MultiplicationOperatorNode() : base('*')
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MultiplicationOperatorNode"/> class.
+        /// </summary>
+        public MultiplicationOperatorNode()
+            : base('*')
         {
         }
 
-        //Operator, precedence, associativity are all included.
+        // Operator, precedence, associativity are all included next assignment.
+
+        /// <summary>
+        /// Evaluates by multiplying left and right subtrees.
+        /// </summary>
+        /// <returns> Evaluated value. </returns>
         public override double Evaluate()
         {
-            return this.Right.Evaluate() * Left.Evaluate();
+            return this.Right.Evaluate() * this.Left.Evaluate();
         }
     }
 }

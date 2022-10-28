@@ -10,6 +10,12 @@ namespace SpreadsheetEngine
     /// </summary>
     public class ExpressionTree
     {
+        public Dictionary<string, double> variables = new Dictionary<string, double>();
+
+        /// <summary>
+        /// Values indicate the order of precedence amongst operators.
+        /// </summary>
+        /// <returns> Dictionary entry containing operator and precedence. </returns>
         private readonly Dictionary<char, int> precedenceDictionary = new Dictionary<char, int>()
         {
             { '+', 1 },
@@ -19,8 +25,6 @@ namespace SpreadsheetEngine
             { '^', 3 },
             { '(', -1 },
         };
-
-        private Dictionary<string, double> variables = new Dictionary<string, double>();
 
         private ExpressionTreeNode root;
 
@@ -129,51 +133,11 @@ namespace SpreadsheetEngine
             return treeStack.Pop();
         }
 
-        //private ExpressionTreeNode Compile(string expression)
-        //{
-        //    if (string.IsNullOrEmpty(expression))
-        //    {
-        //        return null;
-        //    }
-
-        //    OperatorNodeFactory factory = new OperatorNodeFactory();
-
-        //    for (int expressionIndex = expression.Length - 1; expressionIndex >= 0; expressionIndex--)
-        //    {
-        //        ExpressionTreeNode n = factory.CreateOperatorNode(expression[expressionIndex]);
-
-        //        if (n != null)
-        //        {
-        //            ((OperatorNode)n).Left = Compile(expression.Substring(0, expressionIndex));
-        //            ((OperatorNode)n).Right = Compile(expression.Substring(expressionIndex + 1));
-
-        //            return n;
-        //        }
-        //    }
-
-        //    double number;
-
-        //    // a constant
-        //    if (double.TryParse(expression, out number))
-        //    {
-        //        return new ConstantNode(number);
-        //    }
-        //    // or variable
-        //    else
-        //    {
-        //        return new VariableNode(expression, this.variables);
-        //    }
-        //}
-
-        /// <summary>
-        /// Values indicate the order of precedence amongst operators.
-        /// </summary>
-        
         /// <summary>
         /// Transform the expression string into a postfix order using Djikstra's Shunting yard algorithm.
         /// </summary>
         /// <param name="expression">Infix expression. </param>
-        private string PostfixOrder(string expression)
+        public string PostfixOrder(string expression)
         {
             Stack<char> postfixStack = new Stack<char>();
 
@@ -250,10 +214,6 @@ namespace SpreadsheetEngine
 
         }
 
-        //public double GetVariable(string variableName)
-        //{
-        //    return this.variables[variableName];
-        //}
 
         /// <summary>
         /// Evaluate expression to a double value.

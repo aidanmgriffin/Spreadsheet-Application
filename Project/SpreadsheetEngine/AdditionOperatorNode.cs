@@ -10,11 +10,20 @@ namespace SpreadsheetEngine
     /// </summary>
     internal class AdditionOperatorNode : OperatorNode
     {
-        public AdditionOperatorNode() : base('+')
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdditionOperatorNode"/> class.
+        /// </summary>
+        public AdditionOperatorNode()
+            : base('+')
         {
         }
 
         // Operator, precedence, associativity are all included.
+
+        /// <summary>
+        /// Returns evaluation by adding together left and right subtrees.
+        /// </summary>
+        /// <returns> Added value. </returns>
         public override double Evaluate()
         {
             return this.Right.Evaluate() + this.Left.Evaluate();
