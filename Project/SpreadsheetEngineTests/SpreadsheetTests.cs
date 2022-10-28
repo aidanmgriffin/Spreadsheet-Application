@@ -25,8 +25,8 @@ namespace SpreadsheetEngineTests
             int numRows = 50;
 
             SpreadsheetEngine.Spreadsheet testSpreadsheet = new SpreadsheetEngine.Spreadsheet(numColumns, numRows);
-            SpreadsheetEngine.CellChild testCell = new SpreadsheetEngine.CellChild(5, 5); 
-            Assert.That(testSpreadsheet.GetCell(5,5), Is.EqualTo(testCell));
+            SpreadsheetEngine.CellChild testCell = new SpreadsheetEngine.CellChild(5, 5);
+            Assert.That(testSpreadsheet.GetCell(5, 5), Is.EqualTo(testCell));
         }
     }
 }
