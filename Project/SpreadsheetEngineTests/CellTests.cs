@@ -6,7 +6,7 @@ namespace SpreadsheetEngineTests
         public void Setup()
         {
         }
-        
+
         [Test]
         public void InstantiateCellTextGetterTest()
         {
@@ -49,7 +49,7 @@ namespace SpreadsheetEngineTests
             int row = 0;
 
             SpreadsheetEngine.CellChild testCell = new SpreadsheetEngine.CellChild(column, row);
-            
+
             Assert.That(testCell.RowIndex, Is.EqualTo(row));
         }
 

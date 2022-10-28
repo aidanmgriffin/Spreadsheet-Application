@@ -1,28 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Aidan Griffin
+ * 11680523
+ */
+
+using System.Transactions;
 
 namespace SpreadsheetEngine
 {
     internal class VariableNode : ExpressionTreeNode
     {
-        public VariableNode(string name, double value)
+        public VariableNode(string name, Dictionary<string, double> vars)
         {
-            Name = name;
-            Value = value;
+            this.Name = name;
+            this.Vars = vars;
         }
 
         public double Value { get; set; }
         public string Name { get; set; }
 
-       
+        Dictionary<string, double> Vars;
 
         public override double Evaluate()
         {
-            return Value;
+            try
+            {
+                return this.Vars[this.Name];
+            }
+            catch (KeyNotFoundException)
+            {
+                Console.WriteLine("Variable not set. Defaulting to 0.");
+                return 0;
+            }
         }
     }
 }

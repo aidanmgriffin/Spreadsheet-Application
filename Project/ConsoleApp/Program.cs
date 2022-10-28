@@ -1,10 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Aidan Griffin
+ * 11680523
+ */
 
 namespace SpreadsheetEngine
 {
@@ -26,7 +23,7 @@ namespace SpreadsheetEngine
                 {
                     case "1":
                         Console.Write("Enter expression: ");
-                        currentExpression = Console.ReadLine(); 
+                        currentExpression = Console.ReadLine();
                         expressionTree = new ExpressionTree(currentExpression);
                         break;
                     case "2":
