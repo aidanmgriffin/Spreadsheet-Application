@@ -7,6 +7,9 @@ namespace Spreadsheet_Aidan_Griffin
 {
     using SpreadsheetEngine;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Reflection.Metadata;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Preset Form1.
@@ -96,6 +99,20 @@ namespace Spreadsheet_Aidan_Griffin
                 SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(0, i);
                 temp.CellText = "=B" + (i + 1);
             }
+        }
+
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(e.ColumnIndex, e.RowIndex);
+            Console.WriteLine(temp.CellText);
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(e.ColumnIndex, e.RowIndex);
+            string msg = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            Console.WriteLine("msg = " + msg);
+            temp.CellText = msg;
         }
     }
 }
