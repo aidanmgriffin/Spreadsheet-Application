@@ -41,8 +41,7 @@ namespace SpreadsheetEngine
             }
             catch (KeyNotFoundException)
             {
-                Console.WriteLine("Variable not set. Defaulting to 0.");
-                return 0;
+                throw new KeyNotFoundException("Cell not set.");
             }
         }
     }

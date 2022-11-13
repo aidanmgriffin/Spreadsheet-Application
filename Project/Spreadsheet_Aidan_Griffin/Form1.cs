@@ -111,7 +111,6 @@ namespace Spreadsheet_Aidan_Griffin
         {
             SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(e.ColumnIndex, e.RowIndex);
             string msg = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-            Console.WriteLine("msg = " + msg);
             temp.CellText = msg;
         }
     }
