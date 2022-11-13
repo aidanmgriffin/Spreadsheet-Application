@@ -10,6 +10,8 @@ namespace SpreadsheetEngine
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -41,7 +43,6 @@ namespace SpreadsheetEngine
         /// <param name="numRows">Passed number of rows in the spreadsheet. </param>
         public Spreadsheet(int numColumns, int numRows)
         {
-            Console.WriteLine("in spreadsheet");
             columnCount = numColumns;
             rowCount = numRows;
 
@@ -52,12 +53,15 @@ namespace SpreadsheetEngine
                 for (int j = 0; j < numRows; j++)
                 {
                     CellChild newChild = new CellChild(i, j);
-                    newChild.PropertyChanged += new PropertyChangedEventHandler(this.CellChangedEvent);
+                    newChild.PropertyChanged += this.CellChangedEvent;
+
+
                     this.spreadsheetArray[i, j] = newChild;
                 }
             }
         }
 
+        Dictionary<string, List<string>> _dependencies = new Dictionary<string, List<string>>();
         /// <summary>
         /// Declare event handler.
         /// </summary>
@@ -69,21 +73,85 @@ namespace SpreadsheetEngine
         /// <param name="sender"> Sender oject. </param>
         /// <param name="e"> PropertyChangedEventArgs. </param>
         public void CellChangedEvent(object sender, PropertyChangedEventArgs e)
+        { 
+            
+            Cell temp = sender as Cell;
+
+            if (e.PropertyName != null)
+            {
+                string key = string.Empty;
+                key += (char)(temp.ColumnIndex + 65);
+                key += (temp.RowIndex + 1);
+
+                if (temp.CellText[0] == '=')
+                {
+                    string cellVal = temp.CellText.Substring(1);
+                    ExpressionTree newExp = new ExpressionTree(cellVal);
+
+                    List<string> varNames = new List<string>();
+
+                    varNames = newExp.GetVariableNames();
+
+                    double dictValue = newExp.Evaluate();
+                    temp.CellValue = dictValue.ToString();
+                    ExpressionTree.variables[key] = dictValue;
+
+
+                    varNames = newExp.GetVariableNames();
+
+                    foreach (string name in varNames)
+                    {
+
+                        if (!this._dependencies.ContainsKey(name))
+                        {
+                            this._dependencies.Add(name, new List<string>());
+                        }
+
+                        this._dependencies[name].Add(key);
+                    }
+
+                    this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
+
+                }
+                else
+                {
+                    temp.CellValue = temp.CellText;
+
+                    double number;
+                    double.TryParse(temp.CellValue, out number);
+
+                    ExpressionTree.variables[key] = number;
+
+                }
+
+
+
+                if (this._dependencies.ContainsKey(key))
+                {
+                    foreach (var dependency in this._dependencies[key].ToList())
+                    {
+
+                        int depnumber = dependency[0] - 65;
+                        int depnumber2 = dependency[1] - '1';
+
+                        CellChild dependentCell = this.spreadsheetArray[depnumber, depnumber2];
+
+                        CellChangedEvent(dependentCell, new PropertyChangedEventArgs("Value"));
+
+                    }
+                }
+
+
+            }
+        }
+
+        public void CellEvent(object sender, PropertyChangedEventArgs e)
         {
             Cell temp = sender as Cell;
 
             if (e.PropertyName != null)
             {
-                if (temp.CellText[0] == '=')
-                {
-                    temp.CellValue = temp.CellText.Substring(1);
-                }
-                else
-                {
-                    temp.CellValue = temp.CellText;
-                }
-
-                this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
+                this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Text"));
             }
         }
 
