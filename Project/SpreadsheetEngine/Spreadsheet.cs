@@ -61,7 +61,11 @@ namespace SpreadsheetEngine
             }
         }
 
+        /// <summary>
+        /// List of all the cells that rely on a particular cell's value.
+        /// </summary>
         Dictionary<string, List<string>> _dependencies = new Dictionary<string, List<string>>();
+
         /// <summary>
         /// Declare event handler.
         /// </summary>
@@ -74,14 +78,13 @@ namespace SpreadsheetEngine
         /// <param name="e"> PropertyChangedEventArgs. </param>
         public void CellChangedEvent(object sender, PropertyChangedEventArgs e)
         { 
-            
             Cell temp = sender as Cell;
 
             if (e.PropertyName != null)
             {
                 string key = string.Empty;
                 key += (char)(temp.ColumnIndex + 65);
-                key += (temp.RowIndex + 1);
+                key += temp.RowIndex + 1;
 
                 if (temp.CellText[0] == '=')
                 {
@@ -137,14 +140,17 @@ namespace SpreadsheetEngine
                         CellChild dependentCell = this.spreadsheetArray[depnumber, depnumber2];
 
                         CellChangedEvent(dependentCell, new PropertyChangedEventArgs("Value"));
-
                     }
                 }
-
 
             }
         }
 
+        /// <summary>
+        /// Unsuccsessful attempt at subscribing to second cell change event.
+        /// </summary>
+        /// <param name="sender">sender. </param>
+        /// <param name="e">Property changed args.</param>
         public void CellEvent(object sender, PropertyChangedEventArgs e)
         {
             Cell temp = sender as Cell;

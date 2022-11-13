@@ -13,6 +13,9 @@ namespace SpreadsheetEngine
     /// </summary>
     public class ExpressionTree
     {
+        /// <summary>
+        /// Contains cells and their values.
+        /// </summary>
         public static Dictionary<string, double> variables = new Dictionary<string, double>();
 
         /// <summary>
@@ -52,9 +55,8 @@ namespace SpreadsheetEngine
         /// <param name="variableValue">Value of variable. </param>
         public void SetVariable(string variableName, double variableValue)
         {
-            //variables[variableName] = variableValue;
-            //Console.WriteLine("Here" + variables[variableName]);
-
+            // variables[variableName] = variableValue;
+            // Console.WriteLine("Here" + variables[variableName]);
         }
 
         List<string> variableNames = new List<string>();
