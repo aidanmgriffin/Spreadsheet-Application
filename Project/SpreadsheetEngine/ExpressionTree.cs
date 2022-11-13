@@ -3,6 +3,9 @@
  * 11680523
  */
 
+using System.ComponentModel;
+using System.Net;
+
 namespace SpreadsheetEngine
 {
     /// <summary>
@@ -10,7 +13,10 @@ namespace SpreadsheetEngine
     /// </summary>
     public class ExpressionTree
     {
-        public Dictionary<string, double> variables = new Dictionary<string, double>();
+        /// <summary>
+        /// Contains cells and their values.
+        /// </summary>
+        public static Dictionary<string, double> variables = new Dictionary<string, double>();
 
         /// <summary>
         /// Values indicate the order of precedence amongst operators.
@@ -30,6 +36,7 @@ namespace SpreadsheetEngine
 
         private string expression;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
         /// Constructor creates the tree from the specific expression.
@@ -48,8 +55,18 @@ namespace SpreadsheetEngine
         /// <param name="variableValue">Value of variable. </param>
         public void SetVariable(string variableName, double variableValue)
         {
-            this.variables[variableName] = variableValue;
+            // variables[variableName] = variableValue;
+            // Console.WriteLine("Here" + variables[variableName]);
         }
+
+        List<string> variableNames = new List<string>();
+
+        public List<string> GetVariableNames()
+        {
+            return this.variableNames;
+        }
+
+        public event PropertyChangedEventHandler CellPropertyChanged;
 
         /// <summary>
         /// Compiles expression tree from postfix expression using a stack.
@@ -100,17 +117,23 @@ namespace SpreadsheetEngine
                 {
                     string str = string.Empty;
 
-                    while (char.IsLetterOrDigit(val))
-                    {
+
+                    char nextVal = expression[expressionIndex + 1 ];
+
+                    if(char.IsDigit(nextVal))
+                    { 
                         str += val;
+                        str += nextVal;
+
+                        int number = val - 65;
+                        int nextAdj = nextVal;
+                        nextAdj -= 49;
+                        VariableNode isVariableOperand = new VariableNode(str, variables);
+
+                        treeStack.Push(isVariableOperand);
+
                         expressionIndex++;
-                        val = expression[expressionIndex];
                     }
-                    expressionIndex--;
-
-                    VariableNode isVariableOperand = new VariableNode(str, this.variables);
-
-                    treeStack.Push(isVariableOperand);
                 }
 
                 // Value is an operator. Pop two trees from stack. Create a new operator tree and push to stack.
@@ -154,13 +177,22 @@ namespace SpreadsheetEngine
                 // If the incoming symbol is an operand, output it.
                 else if (char.IsLetterOrDigit(val))
                 {
+
+                    string key = string.Empty;
+                    bool isVar = false;
+
                     while (expressionIndex + 1 < expression.Length && char.IsLetterOrDigit(expression[expressionIndex + 1]))
                     {
                         postfixExpression += expression[expressionIndex];
+                        key += expression[expressionIndex];
                         expressionIndex++;
+                        isVar = true;
                     }
 
                     postfixExpression += expression[expressionIndex];
+                    key += expression[expressionIndex];
+                    if (isVar) { variableNames.Add(key); }
+
                     postfixExpression += ' ';
                 }
                 // If the incoming symbol is a left parenthesis, push it on the stack.
@@ -173,7 +205,8 @@ namespace SpreadsheetEngine
                 {
                     while (postfixStack.Count > 0 && postfixStack.Peek() != '(')
                     {
-                        postfixExpression += postfixStack.Pop();
+                        char newpopval = postfixStack.Pop();
+                        postfixExpression += newpopval;
                         postfixExpression += ' ';
                     }
 
@@ -192,7 +225,8 @@ namespace SpreadsheetEngine
                     {
                         while (postfixStack.Count > 0 && this.precedenceDictionary[val] <= this.precedenceDictionary[postfixStack.Peek()])
                         {
-                            postfixExpression += postfixStack.Pop();
+                            char newpopval = postfixStack.Pop();
+                            postfixExpression += newpopval;
                             postfixExpression += ' ';
                         }
 
@@ -205,7 +239,8 @@ namespace SpreadsheetEngine
             // At the end of expression, all operators on stack are popped and outputted.
             while (postfixStack.Count > 0)
             {
-                postfixExpression += postfixStack.Pop();
+                char newpopval = postfixStack.Pop();
+                postfixExpression += newpopval;
                 postfixExpression += ' ';
             }
 
@@ -214,6 +249,15 @@ namespace SpreadsheetEngine
 
         }
 
+        public void CellEvent(object sender, PropertyChangedEventArgs e)
+        {
+            Cell temp = sender as Cell;
+
+            if(e.PropertyName != null)
+            {
+                this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Text"));
+            }
+        }
 
         /// <summary>
         /// Evaluate expression to a double value.
@@ -222,6 +266,7 @@ namespace SpreadsheetEngine
         public double Evaluate()
         {
             return this.root.Evaluate();
+
         }
     }
 }

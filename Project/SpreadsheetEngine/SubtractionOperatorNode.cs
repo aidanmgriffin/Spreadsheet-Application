@@ -18,6 +18,8 @@ namespace SpreadsheetEngine
         {
         }
 
+        public int Precedence = 1;
+
         // Operator, precedence, associativity are all included in class for the next assignment.
         // char operator = '-'
         // char precedence = 1;

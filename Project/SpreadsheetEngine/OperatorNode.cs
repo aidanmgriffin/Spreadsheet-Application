@@ -3,6 +3,8 @@
  * 11680523
  */
 
+using System.Reflection;
+
 namespace SpreadsheetEngine
 {
     /// <summary>
@@ -16,7 +18,7 @@ namespace SpreadsheetEngine
         /// <param name="c">Operator from expression. </param>
         public OperatorNode(char c)
         {
-            this.OperatorVal = c;
+            this.Operator = c;
             this.Left = null;
             this.Right = null;
         }
@@ -24,7 +26,12 @@ namespace SpreadsheetEngine
         /// <summary>
         /// Gets or sets character value.
         /// </summary>
-        public char OperatorVal { get; set; }
+        public char Operator { get; set; }
+
+        /// <summary>
+        /// Gets precedence value.
+        /// </summary>
+        public int Precedence { get; }
 
         /// <summary>
         /// Gets or sets left subtree.

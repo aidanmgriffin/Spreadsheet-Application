@@ -18,6 +18,8 @@ namespace SpreadsheetEngine
         {
         }
 
+        public int Precedence = 2;
+
         // Operator, precedence, associativity are all included.
 
 
