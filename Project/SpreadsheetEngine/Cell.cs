@@ -39,6 +39,9 @@ namespace SpreadsheetEngine
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public event PropertyChangedEventHandler VariableChanged;
+
+
         /// <summary>
         /// Gets the current index of the row.
         /// </summary>
@@ -79,7 +82,7 @@ namespace SpreadsheetEngine
                 return this.cellvalue;
             }
 
-            internal set
+            set
             {
                 if (value != this.cellvalue)
                 {
