@@ -45,12 +45,6 @@ namespace SpreadsheetEngine
             this.root = this.Compile(this.expression);
         }
 
-        //string key = string.Empty;
-        //key += (char) (temp.ColumnIndex + 65);
-        //            key += (temp.RowIndex + 1);
-        //            Console.WriteLine("Key- " + key);
-        //            newExp.SetVariable(key, dictValue);
-
         /// <summary>
         /// Set a variable in the dictionary.
         /// </summary>
@@ -121,13 +115,6 @@ namespace SpreadsheetEngine
                 {
                     string str = string.Empty;
 
-                    //while (char.IsLetterOrDigit(val))
-                    //{
-                    //    str += val;
-                    //    expressionIndex++;
-                    //    val = expression[expressionIndex];
-                    //}
-                    //expressionIndex--;
 
                     char nextVal = expression[expressionIndex + 1 ];
 
@@ -136,15 +123,9 @@ namespace SpreadsheetEngine
                         str += val;
                         str += nextVal;
 
-                        //this.variableNames.Add(str);
-
                         int number = val - 65;
                         int nextAdj = nextVal;
                         nextAdj -= 49;
-                        //Console.WriteLine("n:" + number +"nv:" + nextAdj);
-                        //CellChild newChild = new CellChild(number, nextAdj);
-                        //newChild.PropertyChanged += CellEvent;
-
                         VariableNode isVariableOperand = new VariableNode(str, variables);
 
                         treeStack.Push(isVariableOperand);
@@ -156,7 +137,6 @@ namespace SpreadsheetEngine
                 // Value is an operator. Pop two trees from stack. Create a new operator tree and push to stack.
                 else
                 {
-                    Console.WriteLine("Roger");
 
                     ExpressionTreeNode rightSubtree = treeStack.Pop();
                     ExpressionTreeNode leftSubtree = treeStack.Pop();
@@ -269,8 +249,6 @@ namespace SpreadsheetEngine
 
         public void CellEvent(object sender, PropertyChangedEventArgs e)
         {
-            Console.WriteLine("wow! Changed1");
-
             Cell temp = sender as Cell;
 
             if(e.PropertyName != null)
