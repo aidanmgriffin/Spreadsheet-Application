@@ -3,6 +3,8 @@
  * 11680523
  */
 
+using System.Runtime.CompilerServices;
+
 namespace SpreadsheetEngine
 {
     /// <summary>
@@ -17,6 +19,8 @@ namespace SpreadsheetEngine
             : base('+')
         {
         }
+
+        public int Precedence = 1;
 
         // Operator, precedence, associativity are all included.
 
