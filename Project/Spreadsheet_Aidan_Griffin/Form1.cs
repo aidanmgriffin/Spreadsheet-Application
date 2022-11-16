@@ -67,10 +67,20 @@ namespace Spreadsheet_Aidan_Griffin
         private void SpreadsheetPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Cell temp = sender as Cell;
+            
 
             this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Value = temp.CellValue;
+            this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Style.BackColor = ToColor(temp.BGColor);
         }
 
+        //Reference: https://social.msdn.microsoft.com/Forums/vstudio/en-US/23cc280f-306e-444d-9577-3d6458094b99/converting-from-color-to-uint-and-vice-versa?forum=wpf
+        private static Color ToColor(uint value)
+        {
+            return Color.FromArgb((byte)((value >> 24) & 0xFF),
+                       (byte)((value >> 16) & 0xFF),
+                       (byte)((value >> 8) & 0xFF),
+                       (byte)(value & 0xFF));
+        }
         /// <summary>
         /// On button click, the demos are initiated.
         /// </summary>
@@ -104,6 +114,8 @@ namespace Spreadsheet_Aidan_Griffin
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(e.ColumnIndex, e.RowIndex);
+            this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Value = temp.CellText;
+
             Console.WriteLine(temp.CellText);
         }
 
@@ -111,7 +123,27 @@ namespace Spreadsheet_Aidan_Griffin
         {
             SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(e.ColumnIndex, e.RowIndex);
             string msg = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp.CellValue;
             temp.CellText = msg;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ColorDialog newDialog = new ColorDialog();
+            newDialog.ShowDialog();
+
+            Color c = newDialog.Color;
+            uint colorUint = (uint)(((c.A << 24) | (c.R << 16) | (c.G << 8) | c.B) & 0xffffffffL);
+            
+            foreach (DataGridViewCell cell in this.dataGridView1.SelectedCells)
+            {
+                SpreadsheetEngine.Cell temp = this.newSpreadsheet.GetCell(cell.ColumnIndex, cell.RowIndex);
+
+                temp.BGColor = colorUint;
+
+                //Console.WriteLine(cell.RowIndex + "," + cell.ColumnIndex);
+                //cell.Style.BackColor = newDialog.Color;
+            }
         }
     }
 }

@@ -39,9 +39,14 @@ namespace SpreadsheetEngine
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public event PropertyChangedEventHandler VariableChanged;
+        public void CellChanged(object sender, PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
+        }
 
+        //change this to hexcode for white.
 
+        // Default color is white: xFFFFFFFF;
         /// <summary>
         /// Gets the current index of the row.
         /// </summary>
@@ -51,6 +56,26 @@ namespace SpreadsheetEngine
         /// Gets the current index of the column.
         /// </summary>
         public int ColumnIndex { get; }
+
+        public uint bgcolor = 4294967295;
+
+        public uint BGColor
+        {
+            get
+            {
+                return bgcolor;
+            }
+            set
+            {
+                Console.WriteLine("value = " + value);
+
+                if(bgcolor != value)
+                {
+                    bgcolor = value;
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("BGColor"));
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets cell text with check for same text. Also allows subscription.

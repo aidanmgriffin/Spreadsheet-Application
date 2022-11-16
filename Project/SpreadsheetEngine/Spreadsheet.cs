@@ -71,6 +71,8 @@ namespace SpreadsheetEngine
         /// </summary>
         public event PropertyChangedEventHandler CellPropertyChanged;
 
+        public List<string> allVars = new List<string>();
+
         /// <summary>
         /// Result of changes in cells. Sets cell value based on text in cell. Additionally, sends result to Form.
         /// </summary>
@@ -80,7 +82,7 @@ namespace SpreadsheetEngine
         { 
             Cell temp = sender as Cell;
 
-            if (e.PropertyName != null)
+            if (temp.CellText != "")
             {
                 string key = string.Empty;
                 key += (char)(temp.ColumnIndex + 65);
@@ -88,6 +90,14 @@ namespace SpreadsheetEngine
 
                 if (temp.CellText[0] == '=')
                 {
+                    foreach (string name in allVars) 
+                    {
+                        int number = name[0] - 65;
+                        int number2 = name[1] - '1';
+                        Cell othercell = GetCell(number, number2);
+                        othercell.PropertyChanged -= temp.CellChanged;
+                    }
+
                     string cellVal = temp.CellText.Substring(1);
                     ExpressionTree newExp = new ExpressionTree(cellVal);
 
@@ -104,16 +114,20 @@ namespace SpreadsheetEngine
 
                     foreach (string name in varNames)
                     {
+                        int number = name[0] - 65;
+                        int number2 = name[1] - '1';
+                        Cell othercell = GetCell(number, number2);
+                        othercell.PropertyChanged += temp.CellChanged;
 
-                        if (!this._dependencies.ContainsKey(name))
-                        {
-                            this._dependencies.Add(name, new List<string>());
-                        }
+                        //if (!this._dependencies.ContainsKey(name))
+                        //{
+                        //    this._dependencies.Add(name, new List<string>());
+                        //}
 
-                        this._dependencies[name].Add(key);
+                        //this._dependencies[name].Add(key);
                     }
 
-                    this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
+                    //this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
 
                 }
                 else
@@ -127,23 +141,68 @@ namespace SpreadsheetEngine
 
                 }
 
+                allVars.Add(key);
 
 
-                if (this._dependencies.ContainsKey(key))
-                {
-                    foreach (var dependency in this._dependencies[key].ToList())
-                    {
+                //if (this._dependencies.ContainsKey(key))
+                //{
+                //    Console.WriteLine("contains key " + key);
 
-                        int depnumber = dependency[0] - 65;
-                        int depnumber2 = dependency[1] - '1';
+                //    foreach (var dependency in this._dependencies[key].ToList())
+                //    {
+                //        int depnumber = dependency[0] - 65;
+                //        int depnumber2 = dependency[1] - '1';
 
-                        CellChild dependentCell = this.spreadsheetArray[depnumber, depnumber2];
+                //        temp = this.spreadsheetArray[depnumber, depnumber2];
 
-                        CellChangedEvent(dependentCell, new PropertyChangedEventArgs("Value"));
-                    }
-                }
+                //        //CellChangedEvent(dependentCell, new PropertyChangedEventArgs("Value"));
+                //        if (temp.CellText[0] == '=')
+                //        {
+                //            string cellVal = temp.CellText.Substring(1);
+                //            ExpressionTree newExp = new ExpressionTree(cellVal);
 
+                //            List<string> varNames = new List<string>();
+
+                //            varNames = newExp.GetVariableNames();
+
+                //            double dictValue = newExp.Evaluate();
+                //            temp.CellValue = dictValue.ToString();
+                //            ExpressionTree.variables[key] = dictValue;
+
+
+                //            varNames = newExp.GetVariableNames();
+
+                //            foreach (string name in varNames)
+                //            {
+
+                //                if (!this._dependencies.ContainsKey(name))
+                //                {
+                //                    this._dependencies.Add(name, new List<string>());
+                //                }
+
+                //                this._dependencies[name].Add(key);
+                //            }
+
+                //            //this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
+
+                //        }
+                //        else
+                //        {
+                //            temp.CellValue = temp.CellText;
+
+                //            double number;
+                //            double.TryParse(temp.CellValue, out number);
+
+                //            ExpressionTree.variables[key] = number;
+
+                //        }
+                //    }
+
+                //    Console.WriteLine("length = " + _dependencies.Count());
+                //    //this._dependencies.Clear();
+                //}
             }
+            this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
         }
 
         /// <summary>
