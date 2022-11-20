@@ -81,6 +81,24 @@ namespace SpreadsheetEngineTests
 
         }
 
+        //Test the ability of single operand cell text to be adopted as cell value.
+        [Test]
+        public void SpreadsheetTextUndoTest()
+        {
+            int numColumns = 26;
+            int numRows = 50;
+
+            SpreadsheetEngine.Spreadsheet testSpreadsheet = new SpreadsheetEngine.Spreadsheet(numColumns, numRows);
+            SpreadsheetEngine.CellChild testCell = new SpreadsheetEngine.CellChild(5, 5);
+            
+            testCell.CellText = "5";
+            testCell.CellText = "2";
+
+            
+            
+            Assert.That(testSpreadsheet.GetCell(5, 5).CellValue, Is.EqualTo("5"));
+        }
+
 
 
     }
