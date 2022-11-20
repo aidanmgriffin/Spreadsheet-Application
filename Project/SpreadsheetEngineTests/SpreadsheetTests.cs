@@ -81,7 +81,38 @@ namespace SpreadsheetEngineTests
 
         }
 
-        //Test the ability of single operand cell text to be adopted as cell value.
+        //Test the ability of single cell to change colors.
+        [Test]
+        public void SpreadsheetColorTest()
+        {
+            int numColumns = 26;
+            int numRows = 50;
+
+            SpreadsheetEngine.Spreadsheet testSpreadsheet = new SpreadsheetEngine.Spreadsheet(numColumns, numRows);
+            SpreadsheetEngine.CellChild testCell = new SpreadsheetEngine.CellChild(5, 5);
+
+            testCell.BGColor = 4294967295;
+
+            Assert.That(testSpreadsheet.GetCell(5, 5).CellValue, Is.EqualTo("5"));
+        }
+
+        //Test the ability of single cell to change text and colors.
+        [Test]
+        public void SpreadsheetColorTextTest()
+        {
+            int numColumns = 26;
+            int numRows = 50;
+
+            SpreadsheetEngine.Spreadsheet testSpreadsheet = new SpreadsheetEngine.Spreadsheet(numColumns, numRows);
+            SpreadsheetEngine.CellChild testCell = new SpreadsheetEngine.CellChild(5, 5);
+
+            testCell.BGColor = 4294967295;
+            testCell.CellText = "5";
+
+            Assert.That(testSpreadsheet.GetCell(5, 5).CellValue, Is.EqualTo("5"));
+        }
+
+        //Test the ability of single operand cell text to be undone.
         [Test]
         public void SpreadsheetTextUndoTest()
         {
@@ -94,8 +125,6 @@ namespace SpreadsheetEngineTests
             testCell.CellText = "5";
             testCell.CellText = "2";
 
-            
-            
             Assert.That(testSpreadsheet.GetCell(5, 5).CellValue, Is.EqualTo("5"));
         }
 
