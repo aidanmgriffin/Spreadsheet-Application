@@ -39,6 +39,11 @@ namespace SpreadsheetEngine
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Cell changed event can be subscribed to from spreadsheet.
+        /// </summary>
+        /// <param name="sender"> Sender. </param>
+        /// <param name="e"> e. </param>
         public void CellChanged(object sender, PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
@@ -57,7 +62,10 @@ namespace SpreadsheetEngine
         /// </summary>
         public int ColumnIndex { get; }
 
-        public uint bgcolor = 4294967295;
+        /// <summary>
+        /// Base background color is white.
+        /// </summary>
+        public uint bgcolor= 4294967295;
 
         public uint BGColor
         {
@@ -65,11 +73,10 @@ namespace SpreadsheetEngine
             {
                 return bgcolor;
             }
+
             set
             {
-                Console.WriteLine("value = " + value);
-
-                if(bgcolor != value)
+                if (bgcolor != value)
                 {
                     bgcolor = value;
                     this.PropertyChanged(this, new PropertyChangedEventArgs("BGColor"));

@@ -62,11 +62,6 @@ namespace SpreadsheetEngine
         }
 
         /// <summary>
-        /// List of all the cells that rely on a particular cell's value.
-        /// </summary>
-        Dictionary<string, List<string>> _dependencies = new Dictionary<string, List<string>>();
-
-        /// <summary>
         /// Declare event handler.
         /// </summary>
         public event PropertyChangedEventHandler CellPropertyChanged;
@@ -79,7 +74,7 @@ namespace SpreadsheetEngine
         /// <param name="sender"> Sender oject. </param>
         /// <param name="e"> PropertyChangedEventArgs. </param>
         public void CellChangedEvent(object sender, PropertyChangedEventArgs e)
-        { 
+        {
             Cell temp = sender as Cell;
 
             if (temp.CellText != "")
@@ -90,12 +85,12 @@ namespace SpreadsheetEngine
 
                 if (temp.CellText[0] == '=')
                 {
-                    foreach (string name in allVars) 
+                    foreach (string name in this.allVars)
                     {
                         int number = name[0] - 65;
                         int number2 = name[1] - '1';
-                        Cell othercell = GetCell(number, number2);
-                        othercell.PropertyChanged -= temp.CellChanged;
+                        Cell newCell = this.GetCell(number, number2);
+                        newCell.PropertyChanged -= temp.CellChanged;
                     }
 
                     string cellVal = temp.CellText.Substring(1);
@@ -109,26 +104,15 @@ namespace SpreadsheetEngine
                     temp.CellValue = dictValue.ToString();
                     ExpressionTree.variables[key] = dictValue;
 
-
                     varNames = newExp.GetVariableNames();
 
                     foreach (string name in varNames)
                     {
                         int number = name[0] - 65;
                         int number2 = name[1] - '1';
-                        Cell othercell = GetCell(number, number2);
-                        othercell.PropertyChanged += temp.CellChanged;
-
-                        //if (!this._dependencies.ContainsKey(name))
-                        //{
-                        //    this._dependencies.Add(name, new List<string>());
-                        //}
-
-                        //this._dependencies[name].Add(key);
+                        Cell newCell = this.GetCell(number, number2);
+                        newCell.PropertyChanged += temp.CellChanged;
                     }
-
-                    //this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
-
                 }
                 else
                 {
@@ -141,68 +125,10 @@ namespace SpreadsheetEngine
 
                 }
 
-                allVars.Add(key);
-
-
-                //if (this._dependencies.ContainsKey(key))
-                //{
-                //    Console.WriteLine("contains key " + key);
-
-                //    foreach (var dependency in this._dependencies[key].ToList())
-                //    {
-                //        int depnumber = dependency[0] - 65;
-                //        int depnumber2 = dependency[1] - '1';
-
-                //        temp = this.spreadsheetArray[depnumber, depnumber2];
-
-                //        //CellChangedEvent(dependentCell, new PropertyChangedEventArgs("Value"));
-                //        if (temp.CellText[0] == '=')
-                //        {
-                //            string cellVal = temp.CellText.Substring(1);
-                //            ExpressionTree newExp = new ExpressionTree(cellVal);
-
-                //            List<string> varNames = new List<string>();
-
-                //            varNames = newExp.GetVariableNames();
-
-                //            double dictValue = newExp.Evaluate();
-                //            temp.CellValue = dictValue.ToString();
-                //            ExpressionTree.variables[key] = dictValue;
-
-
-                //            varNames = newExp.GetVariableNames();
-
-                //            foreach (string name in varNames)
-                //            {
-
-                //                if (!this._dependencies.ContainsKey(name))
-                //                {
-                //                    this._dependencies.Add(name, new List<string>());
-                //                }
-
-                //                this._dependencies[name].Add(key);
-                //            }
-
-                //            //this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
-
-                //        }
-                //        else
-                //        {
-                //            temp.CellValue = temp.CellText;
-
-                //            double number;
-                //            double.TryParse(temp.CellValue, out number);
-
-                //            ExpressionTree.variables[key] = number;
-
-                //        }
-                //    }
-
-                //    Console.WriteLine("length = " + _dependencies.Count());
-                //    //this._dependencies.Clear();
-                //}
+                this.allVars.Add(key);
             }
-            this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Value"));
+
+            this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(e.PropertyName));
         }
 
         /// <summary>
