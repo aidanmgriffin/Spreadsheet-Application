@@ -345,30 +345,27 @@ namespace Spreadsheet_Aidan_Griffin
                     key += (char)(redoCell._cell.ColumnIndex + 65);
                     key += redoCell._cell.RowIndex + 1;
 
-                        switch (redoCell.errorMessage)
-                        {
-                            case 0:
-                            
+                    switch (redoCell.errorMessage)
+                    {
+                        case 0:
                                 if (this.CellGroup.ContainsKey(key))
                                 {
                                     k += this.CellGroup[key] + 1;
                                 }
+
                                 redoCell._cell.bgcolor = redoCell.cell_color;
                                 break;
 
-                            case 1:
-                            
-                            if (redoCell.cell_text != " ")
-                            {
-                                redoCell._cell.CellText = redoCell.cell_text;
+                        case 1:
+                                if (redoCell.cell_text != " ")
+                                {
+                                    redoCell._cell.CellText = redoCell.cell_text;
+                                }
+
                                 break;
-                            }
-                            break;
-                        }
-                    
+                    }
                 }
             }
-
         }
     }
 }
