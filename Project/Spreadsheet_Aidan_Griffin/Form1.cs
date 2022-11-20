@@ -292,12 +292,12 @@ namespace Spreadsheet_Aidan_Griffin
                             }
 
                             undoCell._cell.BGColor = undoCell.cell_color;
-                            this.redoToolStripMenuItem.Text = "redo " + errorMessages[0];
+                            this.redoToolStripMenuItem.Text = "redo " + this.errorMessages[0];
 
                             break;
                         case 1:
                             undoCell._cell.CellText = undoCell.cell_text;
-                            this.redoToolStripMenuItem.Text = "redo " + errorMessages[1];
+                            this.redoToolStripMenuItem.Text = "redo " + this.errorMessages[1];
 
                             break;
                     }
@@ -310,16 +310,14 @@ namespace Spreadsheet_Aidan_Griffin
                     {
                         this.undoEnabled = false;
                     }
-
                 }
             }
-
 
             this.numColorsChanged = 0;
         }
 
         /// <summary>
-        /// Redo button function. Fails redoing colors.
+        /// Redo button function. Fails redoing groups of colors.
         /// </summary>
         /// <param name="sender"> Sender. </param>
         /// <param name="e"> e. </param>
@@ -348,13 +346,11 @@ namespace Spreadsheet_Aidan_Griffin
                     switch (redoCell.errorMessage)
                     {
                         case 0:
-                                if (this.CellGroup.ContainsKey(key))
-                                {
-                                    k += this.CellGroup[key] + 1;
-                                }
+                                redoCell._cell.BGColor = redoCell.cell_color;
 
-                                redoCell._cell.bgcolor = redoCell.cell_color;
-                                break;
+                                k = 2;
+                           
+                            break;
 
                         case 1:
                                 if (redoCell.cell_text != " ")
