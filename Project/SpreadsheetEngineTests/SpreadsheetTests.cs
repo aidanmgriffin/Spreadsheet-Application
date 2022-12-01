@@ -128,6 +128,17 @@ namespace SpreadsheetEngineTests
             Assert.That(testSpreadsheet.GetCell(5, 5).CellValue, Is.EqualTo("5"));
         }
 
+        [Test]
+        public void SpreadsheetSaveTest()
+        {
+        }
+
+        [Test]
+        public void SpreadsheetOpenTest()
+        {
+        }
+
+
 
 
     }
