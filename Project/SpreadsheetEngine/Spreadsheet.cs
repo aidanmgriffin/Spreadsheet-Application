@@ -222,23 +222,42 @@ namespace SpreadsheetEngine
                         case "location":
                             thisCell.location = saveReader.ReadElementContentAsString();
 
-                            int number = thisCell.location[0] - 65;
-                            int number2 = thisCell.location[1] - '1';
-                            thisCell.inner = this.GetCell(number, number2);
-                            
-                            break;
+                            try
+                            {
+                                int number = thisCell.location[0] - 65;
+                                int number2 = thisCell.location[1] - '1';
+                                thisCell.inner = this.GetCell(number, number2);
+                                break;
+                            }
+                            catch
+                            {
+                                throw new ArgumentNullException();
+                                break;
+                            }
 
                         case "text":
-
-                            thisCell.inner.CellText = saveReader.ReadElementContentAsString();
-
-                            break;
+                            try
+                            {
+                                thisCell.inner.CellText = saveReader.ReadElementContentAsString();
+                                break;
+                            }
+                            catch
+                            {
+                                throw new ArgumentNullException();
+                                break;
+                            }
 
                         case "color":
-
-                            thisCell.inner.BGColor = Convert.ToUInt32(saveReader.ReadElementContentAsString());
-
-                            break;
+                            try
+                            {
+                                thisCell.inner.BGColor = Convert.ToUInt32(saveReader.ReadElementContentAsString());
+                                break;
+                            }
+                            catch
+                            {
+                                throw new ArgumentNullException();
+                                break;
+                            }
                     }
                 }
             }
