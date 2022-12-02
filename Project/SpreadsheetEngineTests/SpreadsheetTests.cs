@@ -128,18 +128,79 @@ namespace SpreadsheetEngineTests
             Assert.That(testSpreadsheet.GetCell(5, 5).CellValue, Is.EqualTo("5"));
         }
 
+        //Test spreadsheet's ability to save.
         [Test]
         public void SpreadsheetSaveTest()
         {
+
+            int numColumns = 26;
+            int numRows = 50;
+
+            SpreadsheetEngine.Spreadsheet testSpreadsheet = new SpreadsheetEngine.Spreadsheet(numColumns, numRows);
+
+            SpreadsheetEngine.CellChild testCell = new SpreadsheetEngine.CellChild(0, 0);
+            SpreadsheetEngine.CellChild testCell2 = new SpreadsheetEngine.CellChild(0, 1);
+            testCell.CellText = "5";
+            testCell2.CellText = "=A1";
+
+            FileStream saveStream = File.Create("doc.xml");
+            testSpreadsheet.Save(saveStream);
         }
 
+        //Test spreadsheet's ability to load.
         [Test]
-        public void SpreadsheetOpenTest()
+        public void SpreadsheetLoadTest()
         {
+
+            int numColumns = 26;
+            int numRows = 50;
+
+            SpreadsheetEngine.Spreadsheet testSpreadsheet = new SpreadsheetEngine.Spreadsheet(numColumns, numRows);
+
+            FileStream loadStream = File.OpenRead("doc.xml");
+            testSpreadsheet.Load(loadStream);
+
+
+            Assert.That(testSpreadsheet.GetCell(0, 1).CellValue, Is.EqualTo("5"));
         }
 
+        //Test spreadsheet's ability to save cells with values and colors.
+        [Test]
+        public void SpreadsheetColorsSaveTest()
+        {
+
+            int numColumns = 26;
+            int numRows = 50;
+
+            SpreadsheetEngine.Spreadsheet testSpreadsheet = new SpreadsheetEngine.Spreadsheet(numColumns, numRows);
+
+            SpreadsheetEngine.CellChild testCell = new SpreadsheetEngine.CellChild(0, 0);
+            SpreadsheetEngine.CellChild testCell2 = new SpreadsheetEngine.CellChild(0, 1);
+            testCell.CellText = "5";
+            testCell2.CellText = "=A1";
+            testCell.BGColor = 4294967295;
+
+            FileStream saveStream = File.Create("doc.xml");
+            testSpreadsheet.Save(saveStream);
+
+        }
+
+        //Test spreadsheet's ability to load cells with values and colors.
+        [Test]
+        public void SpreadsheetColorsLoadTest()
+        {
+
+            int numColumns = 26;
+            int numRows = 50;
+
+            SpreadsheetEngine.Spreadsheet testSpreadsheet = new SpreadsheetEngine.Spreadsheet(numColumns, numRows);
+
+            FileStream loadStream = File.OpenRead("doc.xml");
+            testSpreadsheet.Load(loadStream);
 
 
+            Assert.That(testSpreadsheet.GetCell(0, 1).BGColor, Is.EqualTo(4294967295));
+        }
 
     }
 }
