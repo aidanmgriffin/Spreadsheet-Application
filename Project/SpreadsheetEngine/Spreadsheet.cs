@@ -168,9 +168,12 @@ namespace SpreadsheetEngine
             }
         }
 
+        /// <summary>
+        /// Save spreadsheet information to XML file.
+        /// </summary>
+        /// <param name="saveStream"> FileStream. </param>
         public void Save(FileStream saveStream)
         {
-            //    string fileName = Path.Combine(Directory.GetCurrentDirectory(), "doc.xml");
             XmlWriter saveWriter = XmlWriter.Create(saveStream,
                 new XmlWriterSettings { Indent = true });
 
@@ -198,13 +201,37 @@ namespace SpreadsheetEngine
 
         }
 
+        /// <summary>
+        /// Struct containing load info.
+        /// </summary>
         public struct CellElements
         {
-            public Cell inner;
-            public string location;
-            public string text;
-            public string color;
+            /// <summary>
+            /// Cell object.
+            /// </summary>
+            public Cell Inner;
+
+            /// <summary>
+            /// Cell location in spreadsheet.
+            /// </summary>
+            public string Location;
+
+            /// <summary>
+            /// Cell text field.
+            /// </summary>
+            public string Text;
+
+            /// <summary>
+            /// Cell color field.
+            /// </summary>
+            public string Color;
         }
+
+        /// <summary>
+        /// Load and parse XML file. Repopulate spreadsheet.
+        /// </summary>
+        /// <param name="loadStream"> Filestream. </param>
+        /// <exception cref="ArgumentNullException"> XML input is nonexistent. </exception>
         public void Load(FileStream loadStream)
         {
             XmlReader saveReader = XmlReader.Create(loadStream);
@@ -220,13 +247,13 @@ namespace SpreadsheetEngine
                     switch (saveReader.Name.ToString())
                     {
                         case "location":
-                            thisCell.location = saveReader.ReadElementContentAsString();
+                            thisCell.Location = saveReader.ReadElementContentAsString();
 
                             try
                             {
-                                int number = thisCell.location[0] - 65;
-                                int number2 = thisCell.location[1] - '1';
-                                thisCell.inner = this.GetCell(number, number2);
+                                int number = thisCell.Location[0] - 65;
+                                int number2 = thisCell.Location[1] - '1';
+                                thisCell.Inner = this.GetCell(number, number2);
                                 break;
                             }
                             catch
@@ -238,7 +265,7 @@ namespace SpreadsheetEngine
                         case "text":
                             try
                             {
-                                thisCell.inner.CellText = saveReader.ReadElementContentAsString();
+                                thisCell.Inner.CellText = saveReader.ReadElementContentAsString();
                                 break;
                             }
                             catch
@@ -250,7 +277,7 @@ namespace SpreadsheetEngine
                         case "color":
                             try
                             {
-                                thisCell.inner.BGColor = Convert.ToUInt32(saveReader.ReadElementContentAsString());
+                                thisCell.Inner.BGColor = Convert.ToUInt32(saveReader.ReadElementContentAsString());
                                 break;
                             }
                             catch
