@@ -71,9 +71,9 @@ namespace Spreadsheet_Aidan_Griffin
         /// </summary>
         public struct CellElements
         {
-            public Cell _cell;
-            public string cell_text;
-            public uint cell_color;
+            public Cell cell;
+            public string cellText;
+            public uint cellColor;
             public int errorMessage;
         }
 
@@ -93,9 +93,9 @@ namespace Spreadsheet_Aidan_Griffin
             if (this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Value == string.Empty || ToUint(this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Style.BackColor) == 0)
             {
                 CellElements emptyElements = new CellElements();
-                emptyElements.cell_text = " ";
-                emptyElements.cell_color = 4294967295;
-                emptyElements._cell = temp;
+                emptyElements.cellText = " ";
+                emptyElements.cellColor = 4294967295;
+                emptyElements.cell = temp;
 
                 switch (e.PropertyName)
                 {
@@ -116,20 +116,20 @@ namespace Spreadsheet_Aidan_Griffin
             {
                 this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Style.BackColor = ToColor(temp.BGColor);
                 this.undoActionHereToolStripMenuItem.Text = "undo " + this.errorMessages[0];
-                cellElem.cell_color = temp.BGColor;
+                cellElem.cellColor = temp.BGColor;
                 cellElem.errorMessage = 0;
             }
             else if (e.PropertyName == "Value")
             {
                 this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Value = temp.CellValue;
                 this.undoActionHereToolStripMenuItem.Text = "undo " + errorMessages[1];
-                cellElem.cell_text = temp.CellText;
+                cellElem.cellText = temp.CellText;
                 cellElem.errorMessage = 1;
             }
 
             if (e.PropertyName != "Text")
             {
-                cellElem._cell = temp;
+                cellElem.cell = temp;
                 this.AddEdit(cellElem);
             }
         }
@@ -282,8 +282,8 @@ namespace Spreadsheet_Aidan_Griffin
                     CellElements undoCell = this.historyStack.Peek();
 
                     string key = string.Empty;
-                    key += (char)(undoCell._cell.ColumnIndex + 65);
-                    key += undoCell._cell.RowIndex + 1;
+                    key += (char)(undoCell.cell.ColumnIndex + 65);
+                    key += undoCell.cell.RowIndex + 1;
 
                     switch (undoCell.errorMessage)
                     {
@@ -293,12 +293,12 @@ namespace Spreadsheet_Aidan_Griffin
                                 k += this.CellGroup[key] + 1;
                             }
 
-                            undoCell._cell.BGColor = undoCell.cell_color;
+                            undoCell.cell.BGColor = undoCell.cellColor;
                             this.redoToolStripMenuItem.Text = "redo " + this.errorMessages[0];
 
                             break;
                         case 1:
-                            undoCell._cell.CellText = undoCell.cell_text;
+                            undoCell.cell.CellText = undoCell.cellText;
                             this.redoToolStripMenuItem.Text = "redo " + this.errorMessages[1];
 
                             break;
@@ -342,22 +342,22 @@ namespace Spreadsheet_Aidan_Griffin
                     redoCell = this.historyStack.Peek();
 
                     string key = string.Empty;
-                    key += (char)(redoCell._cell.ColumnIndex + 65);
-                    key += redoCell._cell.RowIndex + 1;
+                    key += (char)(redoCell.cell.ColumnIndex + 65);
+                    key += redoCell.cell.RowIndex + 1;
 
                     switch (redoCell.errorMessage)
                     {
                         case 0:
-                                redoCell._cell.BGColor = redoCell.cell_color;
+                                redoCell.cell.BGColor = redoCell.cellColor;
 
                                 k = 2;
 
                                 break;
 
                         case 1:
-                                if (redoCell.cell_text != " ")
+                                if (redoCell.cellText != " ")
                                 {
-                                    redoCell._cell.CellText = redoCell.cell_text;
+                                    redoCell.cell.CellText = redoCell.cellText;
                                 }
 
                                 break;
