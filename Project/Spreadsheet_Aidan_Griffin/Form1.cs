@@ -9,11 +9,13 @@ namespace Spreadsheet_Aidan_Griffin
     using SpreadsheetEngine;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Data;
     using System.Diagnostics;
     using System.Reflection.Metadata;
     using System.Runtime.CompilerServices;
     using System.Windows.Forms;
     using System.Windows.Input;
+    using System.Xml;
 
     /// <summary>
     /// Preset Form1.
@@ -88,7 +90,7 @@ namespace Spreadsheet_Aidan_Griffin
         {
             Cell temp = sender as Cell;
 
-            if ((string)this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Value == string.Empty || ToUint(this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Style.BackColor) == 0)
+            if (this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Value == string.Empty || ToUint(this.dataGridView1.Rows[temp.RowIndex].Cells[temp.ColumnIndex].Style.BackColor) == 0)
             {
                 CellElements emptyElements = new CellElements();
                 emptyElements.cell_text = " ";
@@ -362,6 +364,30 @@ namespace Spreadsheet_Aidan_Griffin
                     }
                 }
             }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            for(int i = 0; i < this.dataGridView1.Columns.Count; i++ )
+            {
+                for (int j = 0; j < this.dataGridView1.Rows.Count; j++)
+                {
+                    this.dataGridView1.Rows[j].Cells[i].Value = DBNull.Value;
+                }
+            }
+
+            this.dataGridView1.DataSource = null;
+            FileStream loadStream = File.OpenRead("doc.xml");
+            this.newSpreadsheet.Load(loadStream);
+           
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            FileStream saveStream = File.Create("doc.xml");
+            this.newSpreadsheet.Save(saveStream);
         }
     }
 }
