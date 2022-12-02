@@ -368,6 +368,8 @@ namespace Spreadsheet_Aidan_Griffin
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.historyStack.Clear();
+            this.undoStack.Clear();
 
             for(int i = 0; i < this.dataGridView1.Columns.Count; i++ )
             {
