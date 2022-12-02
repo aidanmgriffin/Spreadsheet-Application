@@ -384,7 +384,6 @@ namespace Spreadsheet_Aidan_Griffin
                 }
             }
 
-            this.dataGridView1.DataSource = null;
             FileStream loadStream = File.OpenRead("doc.xml");
             this.newSpreadsheet.Load(loadStream);
         }
