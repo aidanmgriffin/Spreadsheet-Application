@@ -351,8 +351,8 @@ namespace Spreadsheet_Aidan_Griffin
                                 redoCell._cell.BGColor = redoCell.cell_color;
 
                                 k = 2;
-                           
-                            break;
+
+                                break;
 
                         case 1:
                                 if (redoCell.cell_text != " ")
@@ -366,12 +366,17 @@ namespace Spreadsheet_Aidan_Griffin
             }
         }
 
+        /// <summary>
+        /// Controls the "load" menu option. Calls load function in logic engine and passes it a filestream.
+        /// </summary>
+        /// <param name="sender"> sender. </param>
+        /// <param name="e"> e. </param>
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.historyStack.Clear();
             this.undoStack.Clear();
 
-            for(int i = 0; i < this.dataGridView1.Columns.Count; i++ )
+            for (int i = 0; i < this.dataGridView1.Columns.Count; i++ )
             {
                 for (int j = 0; j < this.dataGridView1.Rows.Count; j++)
                 {
@@ -382,12 +387,15 @@ namespace Spreadsheet_Aidan_Griffin
             this.dataGridView1.DataSource = null;
             FileStream loadStream = File.OpenRead("doc.xml");
             this.newSpreadsheet.Load(loadStream);
-           
         }
 
+        /// <summary>
+        /// Controls the "Save" menu option. Calls save function in logic engine and passes it a filestream.
+        /// </summary>
+        /// <param name="sender"> sender. </param>
+        /// <param name="e"> e. </param>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             FileStream saveStream = File.Create("doc.xml");
             this.newSpreadsheet.Save(saveStream);
         }
