@@ -8,12 +8,16 @@ namespace SpreadsheetEngine
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data.Common;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Security;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Xml;
+    using System.Xml.Linq;
 
     /// <summary>
     /// Defines the various methods required to create a spreadsheet.
@@ -161,6 +165,82 @@ namespace SpreadsheetEngine
             else
             {
                 return null;
+            }
+        }
+
+        public void Save(FileStream saveStream)
+        {
+            //    string fileName = Path.Combine(Directory.GetCurrentDirectory(), "doc.xml");
+            XmlWriter saveWriter = XmlWriter.Create(saveStream,
+                new XmlWriterSettings { Indent = true });
+
+            saveWriter.WriteStartDocument();
+
+            saveWriter.WriteStartElement("cells");
+
+            foreach (string location in this.allVars)
+            {
+                int number = location[0] - 65;
+                int number2 = location[1] - '1';
+                Cell newcell = this.GetCell(number, number2);
+                Console.WriteLine(location + newcell.CellText);
+
+                saveWriter.WriteElementString("location", location);
+                saveWriter.WriteElementString("text", newcell.CellText);
+                saveWriter.WriteElementString("color", newcell.bgcolor.ToString());
+
+            }
+
+            saveWriter.WriteEndElement();
+            saveWriter.Close();
+            saveStream.Close();
+
+
+        }
+
+        public struct CellElements
+        {
+            public Cell inner;
+            public string location;
+            public string text;
+            public string color;
+        }
+        public void Load(FileStream loadStream)
+        {
+            XmlReader saveReader = XmlReader.Create(loadStream);
+            List<string> locationList = new List<string>();
+            saveReader.MoveToContent();
+
+            CellElements thisCell = new();
+
+            while (saveReader.Read())
+            {
+                if(saveReader.IsStartElement())
+                {
+                    switch (saveReader.Name.ToString())
+                    {
+                        case "location":
+                            thisCell.location = saveReader.ReadElementContentAsString();
+
+                            int number = thisCell.location[0] - 65;
+                            int number2 = thisCell.location[1] - '1';
+                            thisCell.inner = this.GetCell(number, number2);
+                            
+                            break;
+
+                        case "text":
+
+                            thisCell.inner.CellText = saveReader.ReadElementContentAsString();
+
+                            break;
+
+                        case "color":
+
+                            thisCell.inner.BGColor = Convert.ToUInt32(saveReader.ReadElementContentAsString());
+
+                            break;
+                    }
+                }
             }
         }
     }
