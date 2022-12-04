@@ -202,7 +202,15 @@ namespace Spreadsheet_Aidan_Griffin
 
             try
             {
-                string msg = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                string msg;
+                try
+                {
+                    msg = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                catch
+                {
+                   msg = "";
+                }
                 this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp.CellValue;
                 temp.CellText = msg;
             }

@@ -92,7 +92,9 @@ namespace SpreadsheetEngine
                     foreach (string name in this.allVars)
                     {
                         int number = name[0] - 65;
-                        int number2 = name[1] - '1';
+                        string numberStr = name.Substring(1, name.Length - 1);
+                        int number2 = Convert.ToInt32(numberStr);
+
                         Cell newCell = this.GetCell(number, number2);
                         newCell.PropertyChanged -= temp.CellChanged;
                     }
@@ -113,7 +115,9 @@ namespace SpreadsheetEngine
                     foreach (string name in varNames)
                     {
                         int number = name[0] - 65;
-                        int number2 = name[1] - '1';
+                        string numberStr = name.Substring(1, name.Length - 1);
+                        int number2 = Convert.ToInt32(numberStr);
+
                         Cell newCell = this.GetCell(number, number2);
                         newCell.PropertyChanged += temp.CellChanged;
                     }
@@ -160,7 +164,7 @@ namespace SpreadsheetEngine
         {
             if (this.spreadsheetArray[columnIndex, rowIndex] != null)
             {
-                return this.spreadsheetArray[columnIndex, rowIndex];
+                    return this.spreadsheetArray[columnIndex, rowIndex];
             }
             else
             {
@@ -184,7 +188,9 @@ namespace SpreadsheetEngine
             foreach (string location in this.allVars)
             {
                 int number = location[0] - 65;
-                int number2 = location[1] - '1';
+                string numberStr = location.Substring(1, location.Length - 1);
+                int number2 = Convert.ToInt32(numberStr);
+
                 Cell newcell = this.GetCell(number, number2);
                 Console.WriteLine(location + newcell.CellText);
 
@@ -252,7 +258,9 @@ namespace SpreadsheetEngine
                             try
                             {
                                 int number = thisCell.Location[0] - 65;
-                                int number2 = thisCell.Location[1] - '1';
+                                string numberStr = thisCell.Location.Substring(1, thisCell.Location.Length - 1);
+                                int number2 = Convert.ToInt32(numberStr);
+
                                 thisCell.Inner = this.GetCell(number, number2);
                                 break;
                             }
