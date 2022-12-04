@@ -202,5 +202,11 @@ namespace SpreadsheetEngineTests
             Assert.That(testSpreadsheet.GetCell(0, 1).BGColor, Is.EqualTo(4294967295));
         }
 
+        [Test]
+        public void BadReferenceTest()
+        {
+
+        }
+
     }
 }
