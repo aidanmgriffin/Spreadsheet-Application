@@ -5,6 +5,7 @@
 
 using System.ComponentModel;
 using System.Net;
+using System.Xml.Linq;
 
 namespace SpreadsheetEngine
 {
@@ -118,15 +119,17 @@ namespace SpreadsheetEngine
                     string str = string.Empty;
 
 
-                    char nextVal = expression[expressionIndex + 1 ];
+                    //char nextVal = expression[expressionIndex + 1];
 
-                    if(char.IsDigit(nextVal))
+                    string nextVal = expression.Substring(1, expression.Length - 2);
+
+                    if (char.IsDigit(nextVal[0]))
                     { 
                         str += val;
                         str += nextVal;
 
                         int number = val - 65;
-                        int nextAdj = nextVal;
+                        int nextAdj = Convert.ToInt32(nextVal);
                         nextAdj -= 49;
                         VariableNode isVariableOperand = new VariableNode(str, variables);
 
@@ -191,7 +194,9 @@ namespace SpreadsheetEngine
 
                     postfixExpression += expression[expressionIndex];
                     key += expression[expressionIndex];
-                    if (isVar) { variableNames.Add(key); }
+                    if (isVar) { 
+                        variableNames.Add(key);
+                    }
 
                     postfixExpression += ' ';
                 }
@@ -244,19 +249,9 @@ namespace SpreadsheetEngine
                 postfixExpression += ' ';
             }
 
-            Console.WriteLine(postfixExpression);
+            //Console.WriteLine(postfixExpression);
             return postfixExpression;
 
-        }
-
-        public void CellEvent(object sender, PropertyChangedEventArgs e)
-        {
-            Cell temp = sender as Cell;
-
-            if(e.PropertyName != null)
-            {
-                this.CellPropertyChanged?.Invoke(sender, new PropertyChangedEventArgs("Text"));
-            }
         }
 
         /// <summary>
