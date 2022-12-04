@@ -38,6 +38,7 @@ namespace SpreadsheetEngine
             try
             {
                 return this.vars[this.Name];
+
             }
             catch (KeyNotFoundException)
             {
